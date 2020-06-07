@@ -2,15 +2,24 @@ package com.colobus.dndplayercompanion;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "proficiencies")
+@Entity(tableName = "proficiencies", foreignKeys = {
+        @ForeignKey(
+                entity = Character.class,
+                parentColumns = "id",
+                childColumns = "character_id",
+                onDelete = ForeignKey.CASCADE)})
 
 public class Proficiencies {
     
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
+
+    @ColumnInfo(name = "character_id")
+    private int characterId;
 
     // Saving throws
     @ColumnInfo(name = "save_proficiency_str")
@@ -86,7 +95,7 @@ public class Proficiencies {
     @ColumnInfo(name = "skill_proficiency_sur")
     private double skillProfSur;
 
-    public Proficiencies(int id,
+    public Proficiencies(int characterId,
                          int saveProfStr, int saveProfDex, int saveProfCon,
                          int saveProfInt, int saveProfWis, int saveProfCha,
                          double skillProfAcr, double skillProfAni, double skillProfArc,
@@ -95,7 +104,7 @@ public class Proficiencies {
                          double skillProfMed, double skillProfNat, double skillProfPrc,
                          double skillProfPrf, double skillProfPrs, double skillProfRel,
                          double skillProfSle, double skillProfSte, double skillProfSur) {
-        this.id = id;
+        this.characterId = characterId;
         this.saveProfStr = saveProfStr;
         this.saveProfDex = saveProfDex;
         this.saveProfCon = saveProfCon;
@@ -124,6 +133,10 @@ public class Proficiencies {
 
     public int getId() {
         return id;
+    }
+
+    public int getCharacterId() {
+        return characterId;
     }
 
     public int getSaveProfStr() {

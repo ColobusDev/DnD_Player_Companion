@@ -1,19 +1,21 @@
 package com.colobus.dndplayercompanion;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Character.class, CharClass.class, Race.class, Alignment.class, Background.class},
-        version = 1)
+@Database(entities = {Character.class, CharClass.class, Race.class, Alignment.class, Background.class, Proficiencies.class},
+        version = 2)
 public abstract class CharacterDatabase extends RoomDatabase {
     private static volatile CharacterDatabase instance;
 
@@ -27,12 +29,15 @@ public abstract class CharacterDatabase extends RoomDatabase {
 
     public abstract AlignmentDao alignmentDao();
 
+    public abstract ProficiencyDao proficiencyDao();
+
     public static synchronized CharacterDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     CharacterDatabase.class, "character_database")
                     .addCallback(roomCallback)
                     .fallbackToDestructiveMigration()
+                    .addMigrations(MIGRATION_1_2)
                     .build();
         }
         return instance;
@@ -52,6 +57,7 @@ public abstract class CharacterDatabase extends RoomDatabase {
         private BackgroundDao backgroundDao;
         private AlignmentDao alignmentDao;
         private CharacterDao characterDao;
+        private ProficiencyDao proficiencyDao;
 
         private PopulateDbAsyncTask(CharacterDatabase db) {
             raceDao = db.raceDao();
@@ -59,6 +65,7 @@ public abstract class CharacterDatabase extends RoomDatabase {
             alignmentDao = db.alignmentDao();
             backgroundDao = db.backgroundDao();
             characterDao = db.characterDao();
+            proficiencyDao = db.proficiencyDao();
         }
 
         @Override
@@ -68,6 +75,9 @@ public abstract class CharacterDatabase extends RoomDatabase {
             insertStarterClasses(classDao);
             insertStarterRaces(raceDao);
             characterDao.insert(new Character("Example name", 1,1,1,1,10,10,10,10,10,10,8,8,10,0,30,1));
+            proficiencyDao.insert(new Proficiencies(1,0,0,0,0, 0,0,
+                    0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0));
 
             return null;
         }
@@ -129,9 +139,28 @@ public abstract class CharacterDatabase extends RoomDatabase {
             alignmentDao.insert(new Alignment("CE", "Chaotic Evil"));
 
         }
-
-
     }
 
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE IF NOT EXISTS 'proficiencies' ('id' INTEGER PRIMARY KEY, " +
+                    "'character_id' INTEGER,'save_proficiency_str' INTEGER, 'save_proficiency_dex' INTEGER, " +
+                    "'save_proficiency_con' INTEGER, 'save_proficiency_int' INTEGER, " +
+                    "'save_proficiency_wis' INTEGER, 'save_proficiency_cha' INTEGER, " +
+                    "'skill_proficiency_acr' INTEGER, 'skill_proficiency_ani' INTEGER, " +
+                    "'skill_proficiency_arc' INTEGER, 'skill_proficiency_ath' INTEGER, " +
+                    "'skill_proficiency_dec' INTEGER, 'skill_proficiency_his' INTEGER, " +
+                    "'skill_proficiency_ins' INTEGER, 'skill_proficiency_int' INTEGER, " +
+                    "'skill_proficiency_inv' INTEGER, 'skill_proficiency_med' INTEGER, " +
+                    "'skill_proficiency_nat' INTEGER, 'skill_proficiency_prc' INTEGER, " +
+                    "'skill_proficiency_prf' INTEGER, 'skill_proficiency_prs' INTEGER, " +
+                    "'skill_proficiency_rel' INTEGER, 'skill_proficiency_sle' INTEGER, " +
+                    "'skill_proficiency_ste' INTEGER, 'skill_proficiency_sur' INTEGER, " +
+                    "FOREIGN KEY ('character_id') REFERENCES 'character_table'('id') ON DELETE CASCADE)");
+            database.execSQL("INSERT INTO proficiencies SELECT character_id, 0,0,0,0,0,0,0,0,0,0,0,0" +
+                    "0,0,0,0,0,0,0,0,0,0,0,0 FROM character_table");
+        }
+    };
 
 }

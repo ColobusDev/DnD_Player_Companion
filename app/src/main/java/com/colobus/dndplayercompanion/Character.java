@@ -27,11 +27,6 @@ import androidx.room.PrimaryKey;
                 entity = Race.class,
                 parentColumns = "id",
                 childColumns = "race_id",
-                onDelete = ForeignKey.CASCADE),
-        @ForeignKey(
-                entity = Proficiencies.class,
-                parentColumns = "id",
-                childColumns = "proficiency_id",
                 onDelete = ForeignKey.CASCADE)
 })
 public class Character {
@@ -90,14 +85,10 @@ public class Character {
     @ColumnInfo(name = "num_hit_dice")
     private int numHitDice;
 
-    @ColumnInfo(name = "proficiency_id", index = true)
-    private int proficiencyId;
-
     public Character(String charName, int raceId, int classId, int backgroundId,
                      int alignmentId, int strength, int dexterity, int constitution,
                      int intelligence, int wisdom, int charisma, int maxHP, int currentHP,
-                     int armourClass, int currentXP, int speed, int numHitDice,
-                     int proficiencyId) {
+                     int armourClass, int currentXP, int speed, int numHitDice) {
         this.charName = charName;
         this.raceId = raceId;
         this.classId = classId;
@@ -115,7 +106,6 @@ public class Character {
         this.currentXP = currentXP;
         this.speed = speed;
         this.numHitDice = numHitDice;
-        this.proficiencyId = proficiencyId;
     }
 
     public void setId(int id) {
@@ -192,10 +182,6 @@ public class Character {
 
     public int getNumHitDice() {
         return numHitDice;
-    }
-
-    public int getProficiencyId() {
-        return proficiencyId;
     }
 
     public int getLevelFromXp(int xp) {
