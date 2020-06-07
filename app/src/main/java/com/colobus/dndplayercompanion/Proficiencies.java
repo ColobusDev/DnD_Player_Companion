@@ -18,7 +18,7 @@ public class Proficiencies {
     @ColumnInfo(name = "id")
     private int id;
 
-    @ColumnInfo(name = "character_id")
+    @ColumnInfo(name = "character_id", index = true)
     private int characterId;
 
     // Saving throws
@@ -129,6 +129,10 @@ public class Proficiencies {
         this.skillProfSle = skillProfSle;
         this.skillProfSte = skillProfSte;
         this.skillProfSur = skillProfSur;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

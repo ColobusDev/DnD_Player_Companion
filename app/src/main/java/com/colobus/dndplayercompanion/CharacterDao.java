@@ -56,7 +56,7 @@ public interface CharacterDao {
             "JOIN race_table R ON R.id = CH.race_id " +
             "JOIN alignment_table a ON a.id = CH.alignment_id " +
             "JOIN background_table b ON b.id = CH.background_id " +
-            "JOIN proficiencies p ON p.id = CH.proficiency_id " +
+            "JOIN proficiencies p ON p.character_id = CH.id " +
             "WHERE CH.id = :character_id")
     LiveData<FullCharacterDetail> getFullCharacterDetailById(int character_id);
 
