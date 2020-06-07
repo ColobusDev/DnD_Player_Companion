@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.character.AddCharacterFragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_character"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <EditText
+                    android:id="@+id/edit_char_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:hint="Character Name"
+                    android:inputType="text" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_class"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title_class"
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Class" />
+
+                <Spinner
+                    android:id="@+id/spinner_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_race"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title_race"
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Race" />
+
+                <Spinner
+                    android:id="@+id/spinner_race"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_background"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title_background"
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Background" />
+
+                <Spinner
+                    android:id="@+id/spinner_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_alignment"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/title_alignment"
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alignment" />
+
+                <Spinner
+                    android:id="@+id/spinner_alignment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textAlignment="textEnd" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_xp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="XP"
+                android:inputType="number"
+                android:padding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_ac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="AC"
+                android:inputType="number"
+                android:padding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Speed"
+                android:inputType="number"
+                android:padding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_hp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Max HP"
+                android:inputType="number"
+                android:padding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="6"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <TextView
+                    android:id="@+id/str_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:text="STR"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                <TextView
+                    android:id="@+id/dex_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:text="DEX"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                <TextView
+                    android:id="@+id/con_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:text="CON"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                <TextView
+                    android:id="@+id/int_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:text="INT"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                <TextView
+                    android:id="@+id/wis_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:text="WIS"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                <TextView
+                    android:id="@+id/cha_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:padding="8dp"
+                    android:textAlignment="center"
+                    android:text="CHA"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <EditText
+                    android:id="@+id/edit_str"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:layout_columnWeight="1"
+                    android:inputType="number"/>
+
+                            <EditText
+                    android:id="@+id/edit_dex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:layout_columnWeight="1"
+                    android:inputType="number"/>
+                         <EditText
+                    android:id="@+id/edit_con"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:layout_columnWeight="1"
+                    android:inputType="number"/>
+                      <EditText
+                    android:id="@+id/edit_int"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:layout_columnWeight="1"
+                    android:inputType="number"/>
+                    <EditText
+                    android:id="@+id/edit_wis"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:layout_columnWeight="1"
+                    android:inputType="number"/>
+                <EditText
+                    android:id="@+id/edit_cha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:layout_columnWeight="1"
+                    android:inputType="number"/>
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save" />
+    </LinearLayout>
+</ScrollView>

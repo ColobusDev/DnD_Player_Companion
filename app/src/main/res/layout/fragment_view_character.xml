@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.character.ViewCharacterFragment">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_class"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <TextView
+                    android:id="@+id/lab_class"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Class" />
+
+                <TextView
+                    android:id="@+id/lab_race"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Race" />
+
+                <TextView
+                    android:id="@+id/val_class"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Barbarian" />
+
+                <TextView
+                    android:id="@+id/val_race"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Halfling" />
+
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_background"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <TextView
+                    android:id="@+id/lab_background"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Background" />
+
+                <TextView
+                    android:id="@+id/lab_alignment"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Alignment" />
+
+                <TextView
+                    android:id="@+id/val_background"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Acolyte" />
+
+                <TextView
+                    android:id="@+id/val_alignment"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="LG" />
+
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <TextView
+                    android:id="@+id/lab_xp"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="XP" />
+
+                <TextView
+                    android:id="@+id/lab_prof_bonus"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Proficiency Bonus" />
+
+
+                <TextView
+                    android:id="@+id/val_xp"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="100" />
+
+                <TextView
+                    android:id="@+id/val_prof_bonus"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="2" />
+
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+
+                <TextView
+                    android:id="@+id/lab_ac"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="AC" />
+
+                <TextView
+                    android:id="@+id/lab_speed"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Speed" />
+
+
+                <TextView
+                    android:id="@+id/val_ac"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10" />
+
+                <TextView
+                    android:id="@+id/val_speed"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="30" />
+
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+
+                <TextView
+                    android:id="@+id/lab_pass_perc"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Passive Perception" />
+
+                <TextView
+                    android:id="@+id/lab_initiative"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Initiative" />
+
+                <TextView
+                    android:id="@+id/val_pass_perc"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10" />
+
+                <TextView
+                    android:id="@+id/val_initiative"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0" />
+            </GridLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <TextView
+                    android:id="@+id/lab_hp"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="HP" />
+
+                <EditText
+                    android:id="@+id/edit_hp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="2"
+                    android:layout_columnWeight="1"
+                    android:text="1"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/val_hp"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="5 / 9" />
+
+                <Button
+                    android:id="@+id/btn_heal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Heal" />
+
+                <Button
+                    android:id="@+id/btn_damage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Damage" />
+            </GridLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="2">
+
+                <TextView
+                    android:id="@+id/lab_hit_die"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Hit Dice" />
+
+                <Button
+                    android:id="@+id/btn_short_rest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Short Rest" />
+
+                <TextView
+                    android:id="@+id/val_hit_die"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="1 x d8" />
+
+
+                <Button
+                    android:id="@+id/btn_long_rest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="Long Rest" />
+            </GridLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="6"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="4">
+
+                <TextView
+                    android:id="@+id/abilities_title"
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="6"
+                    android:layout_columnWeight="1"
+                    android:layout_marginBottom="8dp"
+                    android:text="Abilities" />
+
+                <TextView
+                    android:id="@+id/str_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="STR"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/dex_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="DEX"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/con_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="CON"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/int_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="INT"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/wis_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="WIS"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/cha_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="CHA"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/mod_str"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mod_dex"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mod_con"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mod_int"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mod_wis"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/mod_cha"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/score_str"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/score_dex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/score_con"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/score_int"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/score_wis"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/score_cha"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="10"
+                    android:textAlignment="center" />
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card-saving_throws"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="6"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:rowCount="3">
+
+                <TextView
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="6"
+                    android:layout_columnWeight="1"
+                    android:layout_marginBottom="8dp"
+                    android:text="Saving Throws" />
+
+                <TextView
+                    android:id="@+id/str_save_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="STR"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/dex_save_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="DEX"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/con_save_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="CON"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/int_save_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="INT"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/wis_save_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="WIS"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/cha_save_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="CHA"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/save_str"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/save_dex"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/save_con"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/save_int"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/save_wis"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/save_cha"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_skills"
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="4"
+                    android:layout_columnWeight="1"
+                    android:layout_marginBottom="8dp"
+                    android:text="Skills" />
+
+                <TextView
+                    android:id="@+id/acr_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Acrobatics"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_acr"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/ani_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Animal Handling"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_ani"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/arc_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Arcana"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_arc"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+
+                <TextView
+                    android:id="@+id/ath_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Athletics"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_ath"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/dec_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Deception"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_dec"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/his_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="History"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_his"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/ins_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Insight"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_ins"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/int_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Intimidation"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_int"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/inv_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Investigation"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_inv"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/med_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Medicine"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_med"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/nat_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Nature"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_nat"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/perc_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Perception"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_prc"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/perf_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Performance"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_prf"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/pers_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Persuasion"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_prs"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/rel_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Religion"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_rel"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/sle_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Sleight of Hand"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_sle"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/ste_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Stealth"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_ste"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/sur_skill_lbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="4"
+                    android:text="Survival"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:id="@+id/skill_sur"
+                    style="@style/CharacterCardValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="+0"
+                    android:textAlignment="center" />
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>
