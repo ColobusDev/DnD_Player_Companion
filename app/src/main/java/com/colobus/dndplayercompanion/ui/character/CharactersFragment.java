@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.colobus.dndplayercompanion.Character;
 import com.colobus.dndplayercompanion.CharacterAdapter;
 import com.colobus.dndplayercompanion.CharacterDao;
+import com.colobus.dndplayercompanion.MainActivity;
 import com.colobus.dndplayercompanion.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -84,6 +85,7 @@ public class CharactersFragment extends Fragment {
             @Override
             public void onItemClick(CharacterDao.BasicCharacterDetail basicCharacterDetail) {
                 int character_id = basicCharacterDetail.getId();
+//                Toast.makeText(getContext(), String.valueOf(character_id), Toast.LENGTH_SHORT).show();
                 launchViewCharacterFragment(character_id);
             }
         });
@@ -93,17 +95,11 @@ public class CharactersFragment extends Fragment {
 
     private void launchAddCharacterFragment() {
         Fragment newFragment = new AddCharacterFragment();
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        fragmentTransaction.replace(((ViewGroup) getView().getParent()).getId(), newFragment)
-                .addToBackStack(null)
-                .commit();
+        ((MainActivity) getActivity()).navigateToFragment(newFragment);
     }
 
     private void launchViewCharacterFragment(int character_id) {
         Fragment fragment = ViewCharacterFragment.newInstance(character_id);
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        fragmentTransaction.replace(((ViewGroup) getView().getParent()).getId(), fragment)
-                .addToBackStack(null)
-                .commit();
+        ((MainActivity) getActivity()).navigateToFragment(fragment);
     }
 }

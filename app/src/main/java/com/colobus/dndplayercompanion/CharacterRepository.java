@@ -13,6 +13,7 @@ public class CharacterRepository {
     private RaceDao raceDao;
     private AlignmentDao alignmentDao;
     private BackgroundDao backgroundDao;
+    private ProficiencyDao proficiencyDao;
     private LiveData<List<Character>> allCharacters;
     private LiveData<List<CharClass>> allClasses;
     private LiveData<List<Race>> allRaces;
@@ -28,6 +29,7 @@ public class CharacterRepository {
         classDao = db.classDao();
         alignmentDao = db.alignmentDao();
         backgroundDao = db.backgroundDao();
+        proficiencyDao = db.proficiencyDao();
         allCharacters = characterDao.getAllCharacters();
         allClasses = classDao.getAllClasses();
         allRaces = raceDao.getAllRaces();
@@ -41,8 +43,8 @@ public class CharacterRepository {
     }
 
     // character insert, update etc
-    public void insertCharacter(Character character) {
-        new InsertCharacterAsyncTask(characterDao).execute(character);
+    public long insertCharacter(Character character) throws Exception{
+        return new InsertCharacterAsyncTask(characterDao).execute(character).get();
     }
 
     public void updateCharacter(Character character) {
@@ -149,9 +151,21 @@ public class CharacterRepository {
         return backgroundDao.getBackgroundById(background_id);
     }
 
+    // proficiencies insert, update etc
+    public void insertProficiencies(Proficiencies proficiencies) {
+        new InsertProficienciesAsyncTask(proficiencyDao).execute(proficiencies);
+    }
+
+    public void updateProficiencies(Proficiencies proficiencies) {
+        new UpdateProficienciesAsyncTask(proficiencyDao).execute(proficiencies);
+    }
+
+    public void deleteProficiencies(Proficiencies proficiencies) {
+        new DeleteProficienciesAsyncTask(proficiencyDao).execute(proficiencies);
+    }
 
 
-    private static class InsertCharacterAsyncTask extends AsyncTask<Character, Void, Void> {
+    private static class InsertCharacterAsyncTask extends AsyncTask<Character, Void, Long> {
         private CharacterDao characterDao;
 
         private InsertCharacterAsyncTask(CharacterDao characterDao) {
@@ -159,9 +173,8 @@ public class CharacterRepository {
         }
 
         @Override
-        protected Void doInBackground(Character... characters) {
-            characterDao.insert(characters[0]);
-            return null;
+        protected Long doInBackground(Character... characters) {
+            return characterDao.insert(characters[0]);
         }
     }
 
@@ -359,6 +372,48 @@ public class CharacterRepository {
         @Override
         protected Void doInBackground(Background... backgrounds) {
             backgroundDao.delete(backgrounds[0]);
+            return null;
+        }
+    }
+
+    private static class InsertProficienciesAsyncTask extends AsyncTask<Proficiencies, Void, Void> {
+        private ProficiencyDao proficiencyDao;
+
+        private InsertProficienciesAsyncTask(ProficiencyDao proficiencyDao) {
+            this.proficiencyDao = proficiencyDao;
+        }
+
+        @Override
+        protected Void doInBackground(Proficiencies... proficiencies) {
+            proficiencyDao.insert(proficiencies[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateProficienciesAsyncTask extends AsyncTask<Proficiencies, Void, Void> {
+        private ProficiencyDao proficiencyDao;
+
+        private UpdateProficienciesAsyncTask(ProficiencyDao proficiencyDao) {
+            this.proficiencyDao = proficiencyDao;
+        }
+
+        @Override
+        protected Void doInBackground(Proficiencies... proficiencies) {
+            proficiencyDao.update(proficiencies[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteProficienciesAsyncTask extends AsyncTask<Proficiencies, Void, Void> {
+        private ProficiencyDao proficiencyDao;
+
+        private DeleteProficienciesAsyncTask(ProficiencyDao proficiencyDao) {
+            this.proficiencyDao = proficiencyDao;
+        }
+
+        @Override
+        protected Void doInBackground(Proficiencies... proficiencies) {
+            proficiencyDao.delete(proficiencies[0]);
             return null;
         }
     }

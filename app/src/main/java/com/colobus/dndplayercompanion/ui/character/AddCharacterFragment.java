@@ -28,6 +28,7 @@ import com.colobus.dndplayercompanion.CharClass;
 import com.colobus.dndplayercompanion.Character;
 import com.colobus.dndplayercompanion.CharacterDao;
 import com.colobus.dndplayercompanion.MainActivity;
+import com.colobus.dndplayercompanion.Proficiencies;
 import com.colobus.dndplayercompanion.R;
 import com.colobus.dndplayercompanion.Race;
 
@@ -174,7 +175,16 @@ public class AddCharacterFragment extends Fragment {
                         backgroundSelectedItemPosition, alignmentSelectedItemPosition,
                         strength, dexterity, constitution, intelligence, wisdom, charisma,
                         hp, hp, ac, xp, speed, level);
-                characterViewModel.insertCharacter(character);
+
+                long character_id;
+                try {
+                    character_id = characterViewModel.insertCharacter(character);
+                    Proficiencies proficiencies = new Proficiencies(character_id,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+                    characterViewModel.insertProficiencies(proficiencies);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.popBackStack();

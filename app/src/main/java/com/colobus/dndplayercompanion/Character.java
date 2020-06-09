@@ -32,7 +32,7 @@ import androidx.room.PrimaryKey;
 public class Character {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id;
+    private long id;
 
     @ColumnInfo(name = "name")
     private String charName;
@@ -108,11 +108,11 @@ public class Character {
         this.numHitDice = numHitDice;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -19,7 +19,7 @@ public class Proficiencies {
     private int id;
 
     @ColumnInfo(name = "character_id", index = true)
-    private int characterId;
+    private long characterId;
 
     // Saving throws
     @ColumnInfo(name = "save_proficiency_str")
@@ -95,7 +95,7 @@ public class Proficiencies {
     @ColumnInfo(name = "skill_proficiency_sur")
     private double skillProfSur;
 
-    public Proficiencies(int characterId,
+    public Proficiencies(long characterId,
                          int saveProfStr, int saveProfDex, int saveProfCon,
                          int saveProfInt, int saveProfWis, int saveProfCha,
                          double skillProfAcr, double skillProfAni, double skillProfArc,
@@ -139,7 +139,7 @@ public class Proficiencies {
         return id;
     }
 
-    public int getCharacterId() {
+    public long getCharacterId() {
         return characterId;
     }
 

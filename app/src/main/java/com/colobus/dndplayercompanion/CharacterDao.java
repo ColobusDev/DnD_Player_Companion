@@ -18,7 +18,7 @@ import java.util.List;
 public interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Character character);
+    long insert(Character character);
 
     @Update
     void update(Character character);

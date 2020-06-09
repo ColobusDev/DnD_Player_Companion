@@ -12,6 +12,7 @@ import com.colobus.dndplayercompanion.CharClass;
 import com.colobus.dndplayercompanion.Character;
 import com.colobus.dndplayercompanion.CharacterDao;
 import com.colobus.dndplayercompanion.CharacterRepository;
+import com.colobus.dndplayercompanion.Proficiencies;
 import com.colobus.dndplayercompanion.Race;
 
 import java.util.List;
@@ -40,8 +41,8 @@ public class CharacterViewModel extends AndroidViewModel {
     public LiveData<List<CharacterDao.BasicCharacterDetail>> getAllBasicCharacterDetails() {
         return allBasicCharacterDetails;
     }
-    public void insertCharacter(Character character) {
-        repository.insertCharacter(character);
+    public long insertCharacter(Character character) throws Exception {
+        return repository.insertCharacter(character);
     }
     public void updateCharacter(Character character) {
         repository.updateCharacter(character);
@@ -99,6 +100,16 @@ public class CharacterViewModel extends AndroidViewModel {
     }
     public LiveData<List<Alignment>> getAllAlignments() {
         return allAlignments;
+    }
+
+    public void insertProficiencies(Proficiencies proficiencies) {
+        repository.insertProficiencies(proficiencies);
+    }
+    public void updateProficiencies(Proficiencies proficiencies) {
+        repository.updateProficiencies(proficiencies);
+    }
+    public void deleteProficiencies(Proficiencies proficiencies) {
+        repository.deleteProficiencies(proficiencies);
     }
 
     public LiveData<Character> getCharacterById(int id) {
