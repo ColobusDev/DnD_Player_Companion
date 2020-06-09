@@ -144,21 +144,8 @@ public abstract class CharacterDatabase extends RoomDatabase {
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            database.execSQL("CREATE TABLE IF NOT EXISTS 'proficiencies' ('id' INTEGER PRIMARY KEY, " +
-                    "'character_id' INTEGER,'save_proficiency_str' INTEGER, 'save_proficiency_dex' INTEGER, " +
-                    "'save_proficiency_con' INTEGER, 'save_proficiency_int' INTEGER, " +
-                    "'save_proficiency_wis' INTEGER, 'save_proficiency_cha' INTEGER, " +
-                    "'skill_proficiency_acr' INTEGER, 'skill_proficiency_ani' INTEGER, " +
-                    "'skill_proficiency_arc' INTEGER, 'skill_proficiency_ath' INTEGER, " +
-                    "'skill_proficiency_dec' INTEGER, 'skill_proficiency_his' INTEGER, " +
-                    "'skill_proficiency_ins' INTEGER, 'skill_proficiency_int' INTEGER, " +
-                    "'skill_proficiency_inv' INTEGER, 'skill_proficiency_med' INTEGER, " +
-                    "'skill_proficiency_nat' INTEGER, 'skill_proficiency_prc' INTEGER, " +
-                    "'skill_proficiency_prf' INTEGER, 'skill_proficiency_prs' INTEGER, " +
-                    "'skill_proficiency_rel' INTEGER, 'skill_proficiency_sle' INTEGER, " +
-                    "'skill_proficiency_ste' INTEGER, 'skill_proficiency_sur' INTEGER, " +
-                    "FOREIGN KEY ('character_id') REFERENCES 'character_table'('id') ON DELETE CASCADE)");
-            database.execSQL("INSERT INTO proficiencies SELECT character_id, 0,0,0,0,0,0,0,0,0,0,0,0" +
+            database.execSQL("CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `race_id` INTEGER NOT NULL, `class_id` INTEGER NOT NULL, `background_id` INTEGER NOT NULL, `alignment_id` INTEGER NOT NULL, `STR` INTEGER NOT NULL, `DEX` INTEGER NOT NULL, `CON` INTEGER NOT NULL, `INT` INTEGER NOT NULL, `WIS` INTEGER NOT NULL, `CHA` INTEGER NOT NULL, `max_HP` INTEGER NOT NULL, `current_HP` INTEGER NOT NULL, `armour_class` INTEGER NOT NULL, `XP` INTEGER NOT NULL, `speed` INTEGER NOT NULL, `num_hit_dice` INTEGER NOT NULL, FOREIGN KEY(`class_id`) REFERENCES `class_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`background_id`) REFERENCES `background_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`alignment_id`) REFERENCES `alignment_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`race_id`) REFERENCES `race_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+            database.execSQL("INSERT INTO proficiencies SELECT null,id, 0,0,0,0,0,0,0,0,0,0,0,0," +
                     "0,0,0,0,0,0,0,0,0,0,0,0 FROM character_table");
         }
     };

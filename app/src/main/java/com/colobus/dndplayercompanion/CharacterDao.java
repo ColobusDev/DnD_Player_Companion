@@ -40,7 +40,7 @@ public interface CharacterDao {
 
     @Query("SELECT CH.id AS id, CH.name AS charName, CL.name AS className, R.name AS raceName, " +
             "b.name as backgroundName, a.short_name as alignmentName, CH.XP AS xp, " +
-            "ch.armour_class, ch.speed, ch.current_hp, ch.max_hp, " +
+            "ch.armour_class, ch.speed, ch.current_HP, ch.max_HP, " +
             "ch.num_hit_dice, cl.hitDiceType," +
             "ch.STR, ch.DEX, ch.CON, ch.INT, ch.WIS, ch.CHA, " +
             "p.save_proficiency_str, p.save_proficiency_dex, p.save_proficiency_con, " +
@@ -150,8 +150,8 @@ public interface CharacterDao {
         private int xp;
         private int armour_class;
         private int speed;
-        private int current_hp;
-        private int max_hp;
+        private int current_HP;
+        private int max_HP;
         private int num_hit_dice;
         private int hitDiceType;
         private int STR;
@@ -187,7 +187,7 @@ public interface CharacterDao {
 
         public FullCharacterDetail(int id, String charName, String className, String raceName,
                                    String backgroundName, String alignmentName, int xp,
-                                   int armour_class, int speed, int current_hp, int max_hp,
+                                   int armour_class, int speed, int current_HP, int max_HP,
                                    int num_hit_dice, int hitDiceType,
                                    int STR, int DEX, int CON, int INT, int WIS, int CHA,
                                    int save_proficiency_str, int save_proficiency_dex,
@@ -211,8 +211,8 @@ public interface CharacterDao {
             this.xp = xp;
             this.armour_class = armour_class;
             this.speed = speed;
-            this.current_hp = current_hp;
-            this.max_hp = max_hp;
+            this.current_HP = current_HP;
+            this.max_HP = max_HP;
             this.num_hit_dice = num_hit_dice;
             this.hitDiceType = hitDiceType;
             this.STR = STR;
@@ -283,12 +283,12 @@ public interface CharacterDao {
             return speed;
         }
 
-        public int getCurrent_hp() {
-            return current_hp;
+        public int getCurrent_HP() {
+            return current_HP;
         }
 
-        public int getMax_hp() {
-            return max_hp;
+        public int getMax_HP() {
+            return max_HP;
         }
 
         public int getNum_hit_dice() {

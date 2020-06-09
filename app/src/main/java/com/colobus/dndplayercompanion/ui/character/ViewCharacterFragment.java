@@ -134,7 +134,7 @@ public class ViewCharacterFragment extends Fragment {
                 valSpeed.setText(String.valueOf(character.getSpeed()));
                 valPassPerc.setText(String.valueOf(10 + character.getModifier("prc_skill")));
                 valInitiative.setText(String.valueOf(character.getDEX()));
-                valHp.setText(getString(R.string.hp,character.getCurrent_hp(),character.getMax_hp()));
+                valHp.setText(getString(R.string.hp,character.getCurrent_HP(),character.getMax_HP()));
                 valHitDie.setText(getString(R.string.hit_die,character.getNum_hit_dice(),character.getHitDiceType()));
 
                 // Abilities

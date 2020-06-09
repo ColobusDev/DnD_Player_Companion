@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "66984a3b45b19968084ef7d1bd5703ab",
+    "identityHash": "f6874125c8095475787ee2ce0191b0c4",
     "entities": [
       {
         "tableName": "character_table",
@@ -529,7 +529,16 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_proficiencies_character_id",
+            "unique": false,
+            "columnNames": [
+              "character_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_proficiencies_character_id` ON `${TABLE_NAME}` (`character_id`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "character_table",
@@ -548,7 +557,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '66984a3b45b19968084ef7d1bd5703ab')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f6874125c8095475787ee2ce0191b0c4')"
     ]
   }
 }
