@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.colobus.dndplayercompanion.Character;
 import com.colobus.dndplayercompanion.CharacterDao;
 import com.colobus.dndplayercompanion.MainActivity;
 import com.colobus.dndplayercompanion.Proficiencies;
+import com.colobus.dndplayercompanion.ProficiencySpinnerAdapter;
 import com.colobus.dndplayercompanion.R;
 import com.colobus.dndplayercompanion.Race;
 
@@ -66,6 +68,60 @@ public class AddCharacterFragment extends Fragment {
         final EditText editInt = root.findViewById(R.id.edit_int);
         final EditText editWis = root.findViewById(R.id.edit_wis);
         final EditText editCha = root.findViewById(R.id.edit_cha);
+
+        //saving throws
+        CheckBox checkSaveStr = root.findViewById(R.id.save_str);
+        CheckBox checkSaveDex = root.findViewById(R.id.save_dex);
+        CheckBox checkSaveCon = root.findViewById(R.id.save_con);
+        CheckBox checkSaveInt = root.findViewById(R.id.save_int);
+        CheckBox checkSaveWis = root.findViewById(R.id.save_wis);
+        CheckBox checkSaveCha = root.findViewById(R.id.save_cha);
+
+        //skills
+        Spinner spinnerSkillAcr = root.findViewById(R.id.skill_acr);
+        Spinner spinnerSkillAni = root.findViewById(R.id.skill_ani);
+        Spinner spinnerSkillArc = root.findViewById(R.id.skill_arc);
+        Spinner spinnerSkillAth = root.findViewById(R.id.skill_ath);
+        Spinner spinnerSkillDec = root.findViewById(R.id.skill_dec);
+        Spinner spinnerSkillHis = root.findViewById(R.id.skill_his);
+        Spinner spinnerSkillIns = root.findViewById(R.id.skill_ins);
+        Spinner spinnerSkillInt = root.findViewById(R.id.skill_int);
+        Spinner spinnerSkillInv = root.findViewById(R.id.skill_inv);
+        Spinner spinnerSkillMed = root.findViewById(R.id.skill_med);
+        Spinner spinnerSkillNat = root.findViewById(R.id.skill_nat);
+        Spinner spinnerSkillPrc = root.findViewById(R.id.skill_prc);
+        Spinner spinnerSkillPrf = root.findViewById(R.id.skill_prf);
+        Spinner spinnerSkillPrs = root.findViewById(R.id.skill_prs);
+        Spinner spinnerSkillRel = root.findViewById(R.id.skill_rel);
+        Spinner spinnerSkillSle = root.findViewById(R.id.skill_sle);
+        Spinner spinnerSkillSte = root.findViewById(R.id.skill_ste);
+        Spinner spinnerSkillSur = root.findViewById(R.id.skill_sur);
+
+        ProficiencySpinnerAdapter adapter = new ProficiencySpinnerAdapter(getActivity(), R.layout.spinner_item,
+                getResources().getStringArray(R.array.proficiency_spinner),
+                getResources().getStringArray(R.array.proficiency_spinner_short));
+
+        spinnerSkillAcr.setAdapter(adapter);
+        spinnerSkillAni.setAdapter(adapter);
+        spinnerSkillArc.setAdapter(adapter);
+        spinnerSkillAth.setAdapter(adapter);
+        spinnerSkillDec.setAdapter(adapter);
+        spinnerSkillHis.setAdapter(adapter);
+        spinnerSkillIns.setAdapter(adapter);
+        spinnerSkillInt.setAdapter(adapter);
+        spinnerSkillInv.setAdapter(adapter);
+        spinnerSkillMed.setAdapter(adapter);
+        spinnerSkillNat.setAdapter(adapter);
+        spinnerSkillPrc.setAdapter(adapter);
+        spinnerSkillPrf.setAdapter(adapter);
+        spinnerSkillPrs.setAdapter(adapter);
+        spinnerSkillRel.setAdapter(adapter);
+        spinnerSkillSle.setAdapter(adapter);
+        spinnerSkillSte.setAdapter(adapter);
+        spinnerSkillSur.setAdapter(adapter);
+
+
+
         Button btnSave = root.findViewById(R.id.button_save);
 
         characterViewModel.getAllRaces().observe(getViewLifecycleOwner(), new Observer<List<Race>>() {

@@ -25,4 +25,6 @@
     <style name="CharacterCardValue" >
         <item name="android:textAppearance" >@style/TextAppearance.AppCompat.Large</item>
     </style>
+
+    <style name="Checkbox"></style>
 </resources>
