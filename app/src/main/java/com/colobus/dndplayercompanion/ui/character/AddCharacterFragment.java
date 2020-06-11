@@ -42,6 +42,24 @@ import java.util.Objects;
 
 public class AddCharacterFragment extends Fragment {
     private CharacterViewModel characterViewModel;
+    Spinner spinnerRace, spinnerClass, spinnerBackground, spinnerAlignment;
+    EditText editCharacterName, editAc, editSpeed, editHp, editXp;
+    EditText editStr, editDex, editCon, editInt, editWis, editCha;
+
+    //saving throws
+    CheckBox checkSaveStr, checkSaveDex, checkSaveCon;
+    CheckBox checkSaveInt, checkSaveWis, checkSaveCha;
+
+    //skills
+    Spinner spinnerSkillAcr, spinnerSkillAni, spinnerSkillArc, spinnerSkillAth;
+    Spinner spinnerSkillDec, spinnerSkillHis, spinnerSkillInt, spinnerSkillIns;
+    Spinner spinnerSkillInv, spinnerSkillMed, spinnerSkillNat, spinnerSkillPrc;
+    Spinner spinnerSkillPrf, spinnerSkillPrs, spinnerSkillRel;
+    Spinner spinnerSkillSle, spinnerSkillSte, spinnerSkillSur;
+
+    ProficiencySpinnerAdapter adapter;
+
+    Button btnSave;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,51 +73,9 @@ public class AddCharacterFragment extends Fragment {
         characterViewModel = new ViewModelProvider(getActivity()).get(CharacterViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_character, container, false);
         getActivity().setTitle("Add Character");
-        final Spinner spinnerRace = root.findViewById(R.id.spinner_race);
-        final Spinner spinnerClass = root.findViewById(R.id.spinner_class);
-        final Spinner spinnerBackground = root.findViewById(R.id.spinner_background);
-        final Spinner spinnerAlignment = root.findViewById(R.id.spinner_alignment);
-        final EditText editCharacterName = root.findViewById(R.id.edit_char_name);
-        final EditText editAc = root.findViewById(R.id.edit_ac);
-        final EditText editSpeed = root.findViewById(R.id.edit_speed);
-        final EditText editHp = root.findViewById(R.id.edit_hp);
-        final EditText editXp = root.findViewById(R.id.edit_xp);
-        final EditText editStr = root.findViewById(R.id.edit_str);
-        final EditText editDex = root.findViewById(R.id.edit_dex);
-        final EditText editCon = root.findViewById(R.id.edit_con);
-        final EditText editInt = root.findViewById(R.id.edit_int);
-        final EditText editWis = root.findViewById(R.id.edit_wis);
-        final EditText editCha = root.findViewById(R.id.edit_cha);
+        getViews(root);
 
-        //saving throws
-        CheckBox checkSaveStr = root.findViewById(R.id.save_str);
-        CheckBox checkSaveDex = root.findViewById(R.id.save_dex);
-        CheckBox checkSaveCon = root.findViewById(R.id.save_con);
-        CheckBox checkSaveInt = root.findViewById(R.id.save_int);
-        CheckBox checkSaveWis = root.findViewById(R.id.save_wis);
-        CheckBox checkSaveCha = root.findViewById(R.id.save_cha);
-
-        //skills
-        Spinner spinnerSkillAcr = root.findViewById(R.id.skill_acr);
-        Spinner spinnerSkillAni = root.findViewById(R.id.skill_ani);
-        Spinner spinnerSkillArc = root.findViewById(R.id.skill_arc);
-        Spinner spinnerSkillAth = root.findViewById(R.id.skill_ath);
-        Spinner spinnerSkillDec = root.findViewById(R.id.skill_dec);
-        Spinner spinnerSkillHis = root.findViewById(R.id.skill_his);
-        Spinner spinnerSkillIns = root.findViewById(R.id.skill_ins);
-        Spinner spinnerSkillInt = root.findViewById(R.id.skill_int);
-        Spinner spinnerSkillInv = root.findViewById(R.id.skill_inv);
-        Spinner spinnerSkillMed = root.findViewById(R.id.skill_med);
-        Spinner spinnerSkillNat = root.findViewById(R.id.skill_nat);
-        Spinner spinnerSkillPrc = root.findViewById(R.id.skill_prc);
-        Spinner spinnerSkillPrf = root.findViewById(R.id.skill_prf);
-        Spinner spinnerSkillPrs = root.findViewById(R.id.skill_prs);
-        Spinner spinnerSkillRel = root.findViewById(R.id.skill_rel);
-        Spinner spinnerSkillSle = root.findViewById(R.id.skill_sle);
-        Spinner spinnerSkillSte = root.findViewById(R.id.skill_ste);
-        Spinner spinnerSkillSur = root.findViewById(R.id.skill_sur);
-
-        ProficiencySpinnerAdapter adapter = new ProficiencySpinnerAdapter(getActivity(), R.layout.spinner_item,
+        adapter = new ProficiencySpinnerAdapter(getActivity(), R.layout.spinner_item,
                 getResources().getStringArray(R.array.proficiency_spinner),
                 getResources().getStringArray(R.array.proficiency_spinner_short));
 
@@ -123,8 +99,7 @@ public class AddCharacterFragment extends Fragment {
         spinnerSkillSur.setAdapter(adapter);
 
 
-
-        Button btnSave = root.findViewById(R.id.button_save);
+        btnSave = root.findViewById(R.id.button_save);
 
         characterViewModel.getAllRaces().observe(getViewLifecycleOwner(), new Observer<List<Race>>() {
             @Override
@@ -158,102 +133,207 @@ public class AddCharacterFragment extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String characterName = editCharacterName.getText().toString();
-                int raceSelectedItemPosition = spinnerRace.getSelectedItemPosition() + 1;
-                int classSelectedItemPosition = spinnerClass.getSelectedItemPosition() + 1;
-                int backgroundSelectedItemPosition = spinnerBackground.getSelectedItemPosition() + 1;
-                int alignmentSelectedItemPosition = spinnerAlignment.getSelectedItemPosition() + 1;
-                int ac;
-                int speed;
-                int xp;
-                int hp;
-                int strength;
-                int dexterity;
-                int constitution;
-                int intelligence;
-                int wisdom;
-                int charisma;
-                if (editAc.getText().toString().isEmpty()) {
-                    ac = 10;
-                } else {
-                    ac = Integer.parseInt(editAc.getText().toString());
-                }
-                if (editSpeed.getText().toString().isEmpty()) {
-                    speed = 30;
-                } else {
-                    speed = Integer.parseInt(editSpeed.getText().toString());
-                }
-                if (editXp.getText().toString().isEmpty()) {
-                    xp = 0;
-                } else {
-                    xp = Integer.parseInt(editXp.getText().toString());
-                }
-                if (editHp.getText().toString().isEmpty()) {
-                    hp = 10;
-                } else{
-                    hp = Integer.parseInt(editHp.getText().toString());
-                }
-                if (editStr.getText().toString().isEmpty()) {
-                    strength = 10;
-                } else{
-                    strength = Integer.parseInt(editStr.getText().toString());
-                }
-                if (editDex.getText().toString().isEmpty()) {
-                    dexterity = 10;
-                } else{
-                    dexterity = Integer.parseInt(editDex.getText().toString());
-                }
-                if (editCon.getText().toString().isEmpty()) {
-                    constitution = 10;
-                } else{
-                    constitution = Integer.parseInt(editCon.getText().toString());
-                }
-                if (editInt.getText().toString().isEmpty()) {
-                    intelligence = 10;
-                } else{
-                    intelligence = Integer.parseInt(editInt.getText().toString());
-                }
-                if (editWis.getText().toString().isEmpty()) {
-                    wisdom = 10;
-                } else{
-                    wisdom = Integer.parseInt(editWis.getText().toString());
-                }
-                if (editCha.getText().toString().isEmpty()) {
-                    charisma = 10;
-                } else{
-                    charisma = Integer.parseInt(editCha.getText().toString());
-                }
-                if (characterName.trim().isEmpty()) {
-                    Toast.makeText(getContext(), "Please enter a character name", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                CharacterDao.BasicCharacterDetail basicCharacterDetail = new CharacterDao.BasicCharacterDetail(0, characterName, xp, spinnerClass.getSelectedItem().toString(), spinnerRace.getSelectedItem().toString());
-                int level = basicCharacterDetail.getLevelFromXp(xp);
-                Character character = new Character(characterName, raceSelectedItemPosition, classSelectedItemPosition,
-                        backgroundSelectedItemPosition, alignmentSelectedItemPosition,
-                        strength, dexterity, constitution, intelligence, wisdom, charisma,
-                        hp, hp, ac, xp, speed, level);
-
-                long character_id;
-                try {
-                    character_id = characterViewModel.insertCharacter(character);
-                    Proficiencies proficiencies = new Proficiencies(character_id,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-                    characterViewModel.insertProficiencies(proficiencies);
-                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putLong("CURRENT_CHARACTER_ID", character_id);
-                    editor.apply();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.popBackStack();
+                saveCharacter();
             }
         });
 
         return root;
+    }
+
+    private void getViews(View root) {
+
+        spinnerRace = root.findViewById(R.id.spinner_race);
+        spinnerClass = root.findViewById(R.id.spinner_class);
+        spinnerBackground = root.findViewById(R.id.spinner_background);
+        spinnerAlignment = root.findViewById(R.id.spinner_alignment);
+        editCharacterName = root.findViewById(R.id.edit_char_name);
+        editAc = root.findViewById(R.id.edit_ac);
+        editSpeed = root.findViewById(R.id.edit_speed);
+        editHp = root.findViewById(R.id.edit_hp);
+        editXp = root.findViewById(R.id.edit_xp);
+        editStr = root.findViewById(R.id.edit_str);
+        editDex = root.findViewById(R.id.edit_dex);
+        editCon = root.findViewById(R.id.edit_con);
+        editInt = root.findViewById(R.id.edit_int);
+        editWis = root.findViewById(R.id.edit_wis);
+        editCha = root.findViewById(R.id.edit_cha);
+
+        //saving throws
+        checkSaveStr = root.findViewById(R.id.save_str);
+        checkSaveDex = root.findViewById(R.id.save_dex);
+        checkSaveCon = root.findViewById(R.id.save_con);
+        checkSaveInt = root.findViewById(R.id.save_int);
+        checkSaveWis = root.findViewById(R.id.save_wis);
+        checkSaveCha = root.findViewById(R.id.save_cha);
+
+        //skills
+        spinnerSkillAcr = root.findViewById(R.id.skill_acr);
+        spinnerSkillAni = root.findViewById(R.id.skill_ani);
+        spinnerSkillArc = root.findViewById(R.id.skill_arc);
+        spinnerSkillAth = root.findViewById(R.id.skill_ath);
+        spinnerSkillDec = root.findViewById(R.id.skill_dec);
+        spinnerSkillHis = root.findViewById(R.id.skill_his);
+        spinnerSkillIns = root.findViewById(R.id.skill_ins);
+        spinnerSkillInt = root.findViewById(R.id.skill_int);
+        spinnerSkillInv = root.findViewById(R.id.skill_inv);
+        spinnerSkillMed = root.findViewById(R.id.skill_med);
+        spinnerSkillNat = root.findViewById(R.id.skill_nat);
+        spinnerSkillPrc = root.findViewById(R.id.skill_prc);
+        spinnerSkillPrf = root.findViewById(R.id.skill_prf);
+        spinnerSkillPrs = root.findViewById(R.id.skill_prs);
+        spinnerSkillRel = root.findViewById(R.id.skill_rel);
+        spinnerSkillSle = root.findViewById(R.id.skill_sle);
+        spinnerSkillSte = root.findViewById(R.id.skill_ste);
+        spinnerSkillSur = root.findViewById(R.id.skill_sur);
+    }
+
+    private double getSkillProfMultiplier(String profType) {
+        double multiplier;
+        switch (profType) {
+            case "Proficient":
+                multiplier = 1;
+                break;
+            case "Half Proficient":
+                multiplier = 0.5;
+                break;
+            case "Expertise":
+                multiplier = 2;
+                break;
+            default:
+                multiplier = 0;
+        }
+        return multiplier;
+    }
+
+    private int getSaveProfMultiplier(boolean isChecked) {
+        if (isChecked) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private void saveCharacter() {
+        String characterName = editCharacterName.getText().toString();
+        int raceSelectedItemPosition = spinnerRace.getSelectedItemPosition() + 1;
+        int classSelectedItemPosition = spinnerClass.getSelectedItemPosition() + 1;
+        int backgroundSelectedItemPosition = spinnerBackground.getSelectedItemPosition() + 1;
+        int alignmentSelectedItemPosition = spinnerAlignment.getSelectedItemPosition() + 1;
+        int ac;
+        int speed;
+        int xp;
+        int hp;
+        int strength;
+        int dexterity;
+        int constitution;
+        int intelligence;
+        int wisdom;
+        int charisma;
+        if (editAc.getText().toString().isEmpty()) {
+            ac = 10;
+        } else {
+            ac = Integer.parseInt(editAc.getText().toString());
+        }
+        if (editSpeed.getText().toString().isEmpty()) {
+            speed = 30;
+        } else {
+            speed = Integer.parseInt(editSpeed.getText().toString());
+        }
+        if (editXp.getText().toString().isEmpty()) {
+            xp = 0;
+        } else {
+            xp = Integer.parseInt(editXp.getText().toString());
+        }
+        if (editHp.getText().toString().isEmpty()) {
+            hp = 10;
+        } else {
+            hp = Integer.parseInt(editHp.getText().toString());
+        }
+        if (editStr.getText().toString().isEmpty()) {
+            strength = 10;
+        } else {
+            strength = Integer.parseInt(editStr.getText().toString());
+        }
+        if (editDex.getText().toString().isEmpty()) {
+            dexterity = 10;
+        } else {
+            dexterity = Integer.parseInt(editDex.getText().toString());
+        }
+        if (editCon.getText().toString().isEmpty()) {
+            constitution = 10;
+        } else {
+            constitution = Integer.parseInt(editCon.getText().toString());
+        }
+        if (editInt.getText().toString().isEmpty()) {
+            intelligence = 10;
+        } else {
+            intelligence = Integer.parseInt(editInt.getText().toString());
+        }
+        if (editWis.getText().toString().isEmpty()) {
+            wisdom = 10;
+        } else {
+            wisdom = Integer.parseInt(editWis.getText().toString());
+        }
+        if (editCha.getText().toString().isEmpty()) {
+            charisma = 10;
+        } else {
+            charisma = Integer.parseInt(editCha.getText().toString());
+        }
+        if (characterName.trim().isEmpty()) {
+            Toast.makeText(getContext(), "Please enter a character name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        CharacterDao.BasicCharacterDetail basicCharacterDetail = new CharacterDao.BasicCharacterDetail(0, characterName, xp, spinnerClass.getSelectedItem().toString(), spinnerRace.getSelectedItem().toString());
+        int level = basicCharacterDetail.getLevelFromXp(xp);
+        Character character = new Character(characterName, raceSelectedItemPosition, classSelectedItemPosition,
+                backgroundSelectedItemPosition, alignmentSelectedItemPosition,
+                strength, dexterity, constitution, intelligence, wisdom, charisma,
+                hp, hp, ac, xp, speed, level);
+
+        long character_id;
+        try {
+            character_id = characterViewModel.insertCharacter(character);
+            Proficiencies proficiencies = buildProficiency(character_id);
+            characterViewModel.insertProficiencies(proficiencies);
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong("CURRENT_CHARACTER_ID", character_id);
+            editor.apply();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.popBackStack();
+
+    }
+
+    private Proficiencies buildProficiency(long character_id) {
+        return new Proficiencies(character_id,
+                getSaveProfMultiplier(checkSaveStr.isChecked()),
+                getSaveProfMultiplier(checkSaveDex.isChecked()),
+                getSaveProfMultiplier(checkSaveCon.isChecked()),
+                getSaveProfMultiplier(checkSaveInt.isChecked()),
+                getSaveProfMultiplier(checkSaveWis.isChecked()),
+                getSaveProfMultiplier(checkSaveCha.isChecked()),
+                getSkillProfMultiplier(spinnerSkillAcr.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillAni.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillArc.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillAth.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillDec.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillHis.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillIns.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillInt.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillInv.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillMed.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillNat.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillPrc.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillPrf.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillPrs.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillRel.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillSle.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillSte.getSelectedItem().toString()),
+                getSkillProfMultiplier(spinnerSkillSur.getSelectedItem().toString()));
     }
 
 //    @Override
