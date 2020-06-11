@@ -95,11 +95,13 @@ public class CharactersFragment extends Fragment {
 
     private void launchAddCharacterFragment() {
         Fragment newFragment = new AddCharacterFragment();
-        ((MainActivity) getActivity()).navigateToFragment(newFragment);
+        String fragmentTag = "ADD_CHARACTER";
+        ((MainActivity) getActivity()).navigateToFragment(newFragment, fragmentTag);
     }
 
     private void launchViewCharacterFragment(int character_id) {
         Fragment fragment = ViewCharacterFragment.newInstance(character_id);
-        ((MainActivity) getActivity()).navigateToFragment(fragment);
+        String fragmentTag = "VIEW_CHARACTER";
+        ((MainActivity) getActivity()).navigateToFragment(fragment, fragmentTag);
     }
 }

@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFragment(new HomeFragment());
+        if (savedInstanceState == null) {
+            loadFragment(new HomeFragment(), "HOME");
+        }
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(this);
@@ -34,35 +36,39 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
+        String fragmentTag = "";
 
         switch (item.getItemId()) {
             case R.id.navigation_home:
                 fragment = new HomeFragment();
+                fragmentTag = "HOME";
                 break;
             case R.id.navigation_character:
                 fragment = new CharactersFragment();
+                fragmentTag = "CHARACTERS";
                 break;
-            case R.id.navigation_notifications:
+            case R.id.navigation_dice:
                 fragment = new NotificationsFragment();
+                fragmentTag = "DICE";
                 break;
         }
 
-        return loadFragment(fragment);
+        return loadFragment(fragment, fragmentTag);
     }
 
-    private boolean loadFragment(Fragment fragment) {
+    private boolean loadFragment(Fragment fragment, String fragmentTag) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment,fragment)
+                    .replace(R.id.nav_host_fragment,fragment, fragmentTag)
                     .commit();
             return true;
         }
         return false;
     }
 
-    public void navigateToFragment(Fragment fragment) {
+    public void navigateToFragment(Fragment fragment, String fragmentTag) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.nav_host_fragment, fragment)
+                .replace(R.id.nav_host_fragment, fragment, fragmentTag)
                 .addToBackStack(null)
                 .commit();
     }
