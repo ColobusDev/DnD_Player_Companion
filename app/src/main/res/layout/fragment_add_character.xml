@@ -216,7 +216,16 @@
                 android:columnCount="6"
                 android:orientation="horizontal"
                 android:padding="8dp"
-                android:rowCount="2">
+                android:rowCount="3">
+
+                <TextView
+                    style="@style/CharacterCardTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="6"
+                    android:layout_columnWeight="1"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/ability_scores" />
 
                 <TextView
                     android:id="@+id/str_lbl"
@@ -224,9 +233,10 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:padding="8dp"
-                    android:text="STR"
+                    android:text="@string/str"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:labelFor="@+id/edit_str"/>
 
                 <TextView
                     android:id="@+id/dex_lbl"
@@ -234,9 +244,10 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:padding="8dp"
-                    android:text="DEX"
+                    android:text="@string/dex"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:labelFor="@+id/edit_dex" />
 
                 <TextView
                     android:id="@+id/con_lbl"
@@ -244,9 +255,10 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:padding="8dp"
-                    android:text="CON"
+                    android:text="@string/con"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:labelFor="@+id/edit_con" />
 
                 <TextView
                     android:id="@+id/int_lbl"
@@ -254,9 +266,10 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:padding="8dp"
-                    android:text="INT"
+                    android:text="@string/int_short"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:labelFor="@+id/edit_int" />
 
                 <TextView
                     android:id="@+id/wis_lbl"
@@ -264,9 +277,10 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:padding="8dp"
-                    android:text="WIS"
+                    android:text="@string/wis"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:labelFor="@+id/edit_wis" />
 
                 <TextView
                     android:id="@+id/cha_lbl"
@@ -274,9 +288,10 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:padding="8dp"
-                    android:text="CHA"
+                    android:text="@string/cha"
                     android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:labelFor="@+id/edit_cha" />
 
                 <EditText
                     android:id="@+id/edit_str"
@@ -284,7 +299,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:inputType="number"
-                    android:text="10"
+                    android:text="@string/score_default"
                     android:textAlignment="center" />
 
                 <EditText
@@ -293,7 +308,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:inputType="number"
-                    android:text="10"
+                    android:text="@string/score_default"
                     android:textAlignment="center" />
 
                 <EditText
@@ -302,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:inputType="number"
-                    android:text="10"
+                    android:text="@string/score_default"
                     android:textAlignment="center" />
 
                 <EditText
@@ -311,7 +326,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:inputType="number"
-                    android:text="10"
+                    android:text="@string/score_default"
                     android:textAlignment="center" />
 
                 <EditText
@@ -320,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:inputType="number"
-                    android:text="10"
+                    android:text="@string/score_default"
                     android:textAlignment="center" />
 
                 <EditText
@@ -329,7 +344,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:inputType="number"
-                    android:text="10"
+                    android:text="@string/score_default"
                     android:textAlignment="center" />
             </GridLayout>
 
@@ -356,14 +371,14 @@
                     android:layout_columnSpan="6"
                     android:layout_columnWeight="1"
                     android:layout_marginBottom="8dp"
-                    android:text="Saving Throw Proficiencies" />
+                    android:text="@string/saving_throw_proficiencies" />
 
                 <TextView
                     android:id="@+id/str_save_lbl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="STR"
+                    android:text="@string/str"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -372,7 +387,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="DEX"
+                    android:text="@string/dex"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -381,7 +396,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="CON"
+                    android:text="@string/con"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -390,7 +405,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="INT"
+                    android:text="@string/int_short"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -399,7 +414,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="WIS"
+                    android:text="@string/wis"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -408,7 +423,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:text="CHA"
+                    android:text="@string/cha"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -484,20 +499,20 @@
                     android:layout_columnSpan="4"
                     android:layout_columnWeight="1"
                     android:layout_marginBottom="8dp"
-                    android:text="Skills" />
+                    android:text="@string/skills" />
 
                 <TextView
                     android:id="@+id/acr_skill_lbl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Acrobatics"
+                    android:text="@string/acrobatics"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_acr"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -508,13 +523,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Animal Handling"
+                    android:text="@string/animal_handling"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_ani"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -525,13 +540,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Arcana"
+                    android:text="@string/arcana"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_arc"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -543,13 +558,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Athletics"
+                    android:text="@string/athletics"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_ath"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -560,13 +575,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Deception"
+                    android:text="@string/deception"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_dec"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -577,13 +592,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="History"
+                    android:text="@string/history"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_his"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -594,13 +609,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Insight"
+                    android:text="@string/insight"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_ins"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -611,13 +626,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Intimidation"
+                    android:text="@string/intimidation"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_int"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -628,13 +643,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Investigation"
+                    android:text="@string/investigation"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_inv"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -645,13 +660,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Medicine"
+                    android:text="@string/medicine"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_med"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -662,64 +677,64 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Nature"
+                    android:text="@string/nature"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_nat"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
                     android:gravity="center"  />
 
                 <TextView
-                    android:id="@+id/perc_skill_lbl"
+                    android:id="@+id/prc_skill_lbl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Perception"
+                    android:text="@string/perception"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_prc"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
                     android:gravity="center"  />
 
                 <TextView
-                    android:id="@+id/perf_skill_lbl"
+                    android:id="@+id/prf_skill_lbl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Performance"
+                    android:text="@string/performance"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_prf"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
                     android:gravity="center"  />
 
                 <TextView
-                    android:id="@+id/pers_skill_lbl"
+                    android:id="@+id/prs_skill_lbl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Persuasion"
+                    android:text="@string/persuasion"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_prs"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -730,12 +745,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Religion"
+                    android:text="@string/religion"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
+                    android:id="@+id/skill_rel"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -746,13 +762,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Sleight of Hand"
+                    android:text="@string/sleight_of_hand"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_sle"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -763,13 +779,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Stealth"
+                    android:text="@string/stealth"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_ste"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
@@ -780,13 +796,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="4"
-                    android:text="Survival"
+                    android:text="@string/survival"
                     android:textAppearance="@style/TextAppearance.AppCompat" />
 
                 <Spinner
                     android:id="@+id/skill_sur"
                     style="@style/Widget.AppCompat.Spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="@dimen/prof_spinner_width"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="N"
