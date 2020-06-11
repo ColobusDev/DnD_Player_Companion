@@ -51,7 +51,7 @@ public class CharacterRepository {
         new UpdateCharacterAsyncTask(characterDao).execute(character);
     }
 
-    public void deleteCharacter(int characterId) {
+    public void deleteCharacter(long characterId) {
         new DeleteCharacterAsyncTask(characterDao).execute(characterId);
     }
 
@@ -131,7 +131,7 @@ public class CharacterRepository {
         return characterDao.getCharacterById(id);
     }
 
-    public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(int id) {
+    public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(long id) {
         return characterDao.getFullCharacterDetailById(id);
     }
 
@@ -192,7 +192,7 @@ public class CharacterRepository {
         }
     }
 
-    private static class DeleteCharacterAsyncTask extends AsyncTask<Integer, Void, Void> {
+    private static class DeleteCharacterAsyncTask extends AsyncTask<Long, Void, Void> {
         private CharacterDao characterDao;
 
         private DeleteCharacterAsyncTask(CharacterDao characterDao) {
@@ -200,7 +200,7 @@ public class CharacterRepository {
         }
 
         @Override
-        protected Void doInBackground(Integer... ints) {
+        protected Void doInBackground(Long... ints) {
             characterDao.delete(ints[0]);
             return null;
         }

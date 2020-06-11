@@ -1,5 +1,7 @@
 package com.colobus.dndplayercompanion.ui.character;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,7 +77,7 @@ public class CharactersFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int character_id = adapter.getBasicCharacterDetailAt(viewHolder.getAdapterPosition()).getId();
+                long character_id = adapter.getBasicCharacterDetailAt(viewHolder.getAdapterPosition()).getId();
                 characterViewModel.deleteCharacter(character_id);
                 Toast.makeText(getContext(), "Character deleted", Toast.LENGTH_SHORT).show();
             }
@@ -84,7 +86,7 @@ public class CharactersFragment extends Fragment {
         adapter.setOnItemClickListener(new CharacterAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(CharacterDao.BasicCharacterDetail basicCharacterDetail) {
-                int character_id = basicCharacterDetail.getId();
+                long character_id = basicCharacterDetail.getId();
 //                Toast.makeText(getContext(), String.valueOf(character_id), Toast.LENGTH_SHORT).show();
                 launchViewCharacterFragment(character_id);
             }
@@ -99,9 +101,14 @@ public class CharactersFragment extends Fragment {
         ((MainActivity) getActivity()).navigateToFragment(newFragment, fragmentTag);
     }
 
-    private void launchViewCharacterFragment(int character_id) {
+    private void launchViewCharacterFragment(long character_id) {
         Fragment fragment = ViewCharacterFragment.newInstance(character_id);
         String fragmentTag = "VIEW_CHARACTER";
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong("CURRENT_CHARACTER_ID", character_id);
+        editor.putBoolean("IS_VIEW_CHARACTER",true);
+        editor.apply();
         ((MainActivity) getActivity()).navigateToFragment(fragment, fragmentTag);
     }
 }

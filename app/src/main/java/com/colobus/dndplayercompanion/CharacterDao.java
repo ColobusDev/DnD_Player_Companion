@@ -24,7 +24,7 @@ public interface CharacterDao {
     void update(Character character);
 
     @Query("DELETE FROM character_table WHERE id = :id")
-    void delete(int id);
+    void delete(long id);
 
     @Query("SELECT * FROM character_table ORDER BY name")
     LiveData<List<Character>> getAllCharacters();
@@ -58,16 +58,16 @@ public interface CharacterDao {
             "JOIN background_table b ON b.id = CH.background_id " +
             "JOIN proficiencies p ON p.character_id = CH.id " +
             "WHERE CH.id = :character_id")
-    LiveData<FullCharacterDetail> getFullCharacterDetailById(int character_id);
+    LiveData<FullCharacterDetail> getFullCharacterDetailById(long character_id);
 
     class BasicCharacterDetail {
-        public int id;
+        public long id;
         public String charName;
         public int xp;
         public String className;
         public String raceName;
 
-        public BasicCharacterDetail(int id, String charName, int xp, String className, String raceName) {
+        public BasicCharacterDetail(long id, String charName, int xp, String className, String raceName) {
             this.id = id;
             this.charName = charName;
             this.xp = xp;
@@ -75,7 +75,7 @@ public interface CharacterDao {
             this.raceName = raceName;
         }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
@@ -141,7 +141,7 @@ public interface CharacterDao {
     }
 
     class FullCharacterDetail {
-        public int id;
+        public long id;
         private String charName;
         private String className;
         private String raceName;
@@ -185,7 +185,7 @@ public interface CharacterDao {
         private int skill_proficiency_ste;
         private int skill_proficiency_sur;
 
-        public FullCharacterDetail(int id, String charName, String className, String raceName,
+        public FullCharacterDetail(long id, String charName, String className, String raceName,
                                    String backgroundName, String alignmentName, int xp,
                                    int armour_class, int speed, int current_HP, int max_HP,
                                    int num_hit_dice, int hitDiceType,
@@ -247,7 +247,7 @@ public interface CharacterDao {
             this.skill_proficiency_sur = skill_proficiency_sur;
         }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 

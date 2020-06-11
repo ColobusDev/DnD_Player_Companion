@@ -1,5 +1,7 @@
 package com.colobus.dndplayercompanion.ui.character;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -237,6 +239,10 @@ public class AddCharacterFragment extends Fragment {
                     character_id = characterViewModel.insertCharacter(character);
                     Proficiencies proficiencies = new Proficiencies(character_id,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
                     characterViewModel.insertProficiencies(proficiencies);
+                    SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putLong("CURRENT_CHARACTER_ID", character_id);
+                    editor.apply();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

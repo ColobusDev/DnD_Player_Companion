@@ -24,7 +24,7 @@ public class ViewCharacterFragment extends Fragment {
 
 
     // TODO: Rename and change types of parameters
-    private int character_id;
+    private long character_id;
 
     public ViewCharacterFragment() {
         // Required empty public constructor
@@ -38,10 +38,10 @@ public class ViewCharacterFragment extends Fragment {
      * @return A new instance of fragment ViewCharacterFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ViewCharacterFragment newInstance(int character_id) {
+    public static ViewCharacterFragment newInstance(long character_id) {
         ViewCharacterFragment fragment = new ViewCharacterFragment();
         Bundle args = new Bundle();
-        args.putInt(CHARACTER_ID, character_id);
+        args.putLong(CHARACTER_ID, character_id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +50,7 @@ public class ViewCharacterFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            character_id = getArguments().getInt(CHARACTER_ID);
+            character_id = getArguments().getLong(CHARACTER_ID);
         }
 
     }

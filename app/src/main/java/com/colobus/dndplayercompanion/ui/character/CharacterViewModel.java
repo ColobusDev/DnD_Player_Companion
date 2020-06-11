@@ -47,7 +47,7 @@ public class CharacterViewModel extends AndroidViewModel {
     public void updateCharacter(Character character) {
         repository.updateCharacter(character);
     }
-    public void deleteCharacter(int characterId) {
+    public void deleteCharacter(long characterId) {
         repository.deleteCharacter(characterId);
     }
     public LiveData<List<Character>> getAllCharacters() {
@@ -115,7 +115,7 @@ public class CharacterViewModel extends AndroidViewModel {
     public LiveData<Character> getCharacterById(int id) {
         return repository.getCharacterById(id);
     }
-    public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(int id) {
+    public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(long id) {
         return repository.getFullCharacterDetailById(id);
     }
     public LiveData<Race> getRaceById(int race_id) {
