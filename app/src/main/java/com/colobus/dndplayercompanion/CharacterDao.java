@@ -166,24 +166,24 @@ public interface CharacterDao {
         private int save_proficiency_int;
         private int save_proficiency_wis;
         private int save_proficiency_cha;
-        private int skill_proficiency_acr;
-        private int skill_proficiency_ani;
-        private int skill_proficiency_arc;
-        private int skill_proficiency_ath;
-        private int skill_proficiency_dec;
-        private int skill_proficiency_his;
-        private int skill_proficiency_ins;
-        private int skill_proficiency_int;
-        private int skill_proficiency_inv;
-        private int skill_proficiency_med;
-        private int skill_proficiency_nat;
-        private int skill_proficiency_prc;
-        private int skill_proficiency_prf;
-        private int skill_proficiency_prs;
-        private int skill_proficiency_rel;
-        private int skill_proficiency_sle;
-        private int skill_proficiency_ste;
-        private int skill_proficiency_sur;
+        private double skill_proficiency_acr;
+        private double skill_proficiency_ani;
+        private double skill_proficiency_arc;
+        private double skill_proficiency_ath;
+        private double skill_proficiency_dec;
+        private double skill_proficiency_his;
+        private double skill_proficiency_ins;
+        private double skill_proficiency_int;
+        private double skill_proficiency_inv;
+        private double skill_proficiency_med;
+        private double skill_proficiency_nat;
+        private double skill_proficiency_prc;
+        private double skill_proficiency_prf;
+        private double skill_proficiency_prs;
+        private double skill_proficiency_rel;
+        private double skill_proficiency_sle;
+        private double skill_proficiency_ste;
+        private double skill_proficiency_sur;
 
         public FullCharacterDetail(long id, String charName, String className, String raceName,
                                    String backgroundName, String alignmentName, int xp,
@@ -193,15 +193,15 @@ public interface CharacterDao {
                                    int save_proficiency_str, int save_proficiency_dex,
                                    int save_proficiency_con, int save_proficiency_int,
                                    int save_proficiency_wis, int save_proficiency_cha,
-                                   int skill_proficiency_acr, int skill_proficiency_ani,
-                                   int skill_proficiency_arc, int skill_proficiency_ath,
-                                   int skill_proficiency_dec, int skill_proficiency_his,
-                                   int skill_proficiency_ins, int skill_proficiency_int,
-                                   int skill_proficiency_inv, int skill_proficiency_med,
-                                   int skill_proficiency_nat, int skill_proficiency_prc,
-                                   int skill_proficiency_prf, int skill_proficiency_prs,
-                                   int skill_proficiency_rel, int skill_proficiency_sle,
-                                   int skill_proficiency_ste, int skill_proficiency_sur) {
+                                   double skill_proficiency_acr, double skill_proficiency_ani,
+                                   double skill_proficiency_arc, double skill_proficiency_ath,
+                                   double skill_proficiency_dec, double skill_proficiency_his,
+                                   double skill_proficiency_ins, double skill_proficiency_int,
+                                   double skill_proficiency_inv, double skill_proficiency_med,
+                                   double skill_proficiency_nat, double skill_proficiency_prc,
+                                   double skill_proficiency_prf, double skill_proficiency_prs,
+                                   double skill_proficiency_rel, double skill_proficiency_sle,
+                                   double skill_proficiency_ste, double skill_proficiency_sur) {
             this.id = id;
             this.charName = charName;
             this.className = className;
@@ -368,7 +368,7 @@ public interface CharacterDao {
         }
 
         public int getModifier(@NotNull String type) {
-            int prof_type;
+            double prof_type;
             int ability;
             int prof_bonus = getProfBonusFromLevel(getLevelFromXp(getXp()));
             switch (type) {

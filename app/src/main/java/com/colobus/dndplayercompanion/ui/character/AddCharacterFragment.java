@@ -193,7 +193,7 @@ public class AddCharacterFragment extends Fragment {
             case "Proficient":
                 multiplier = 1;
                 break;
-            case "Half Proficient":
+            case "Half proficient":
                 multiplier = 0.5;
                 break;
             case "Expertise":

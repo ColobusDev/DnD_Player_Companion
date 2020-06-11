@@ -22,6 +22,23 @@ public class ViewCharacterFragment extends Fragment {
     private static final String CHARACTER_ID = "character_id";
     private CharacterViewModel characterViewModel;
 
+    // Main stats
+    TextView valClass, valRace, valAlignment, valBackground, valXp;
+    TextView valProfBonus, valAc, valSpeed, valPassPrc, valInitiative;
+    TextView valHp, valHitDie;
+
+    // Abilities
+    TextView modStr, modDex, modCon, modInt, modWis, modCha;
+    TextView scoreStr, scoreDex, scoreCon, scoreInt, scoreWis, scoreCha;
+
+    // Saving throws
+    TextView saveStr, saveDex, saveCon, saveInt, saveWis, saveCha;
+
+    // Skills
+    TextView skillAcr, skillAni, skillArc, skillAth, skillDec, skillIns;
+    TextView skillInt, skillInv, skillHis, skillMed, skillNat, skillPrc;
+    TextView skillPrf, skillPrs, skillRel, skillSle, skillSte, skillSur;
+
 
     // TODO: Rename and change types of parameters
     private long character_id;
@@ -60,69 +77,14 @@ public class ViewCharacterFragment extends Fragment {
                              Bundle savedInstanceState) {
         characterViewModel = new ViewModelProvider(getActivity()).get(CharacterViewModel.class);
         View root = inflater.inflate(R.layout.fragment_view_character, container, false);
-
-        // Main stats
-        final TextView valClass = root.findViewById(R.id.val_class);
-        final TextView valRace = root.findViewById(R.id.val_race);
-        final TextView valAlignment = root.findViewById(R.id.val_alignment);
-        final TextView valBackground = root.findViewById(R.id.val_background);
-        final TextView valXp = root.findViewById(R.id.val_xp);
-        final TextView valProfBonus = root.findViewById(R.id.val_prof_bonus);
-        final TextView valAc = root.findViewById(R.id.val_ac);
-        final TextView valSpeed = root.findViewById(R.id.val_speed);
-        final TextView valPassPerc = root.findViewById(R.id.val_pass_perc);
-        final TextView valInitiative = root.findViewById(R.id.val_initiative);
-        final TextView valHp = root.findViewById(R.id.val_hp);
-        final TextView valHitDie = root.findViewById(R.id.val_hit_die);
-
-        // Abilities
-        final TextView modStr = root.findViewById(R.id.mod_str);
-        final TextView modDex = root.findViewById(R.id.mod_dex);
-        final TextView modCon = root.findViewById(R.id.mod_con);
-        final TextView modInt = root.findViewById(R.id.mod_int);
-        final TextView modWis = root.findViewById(R.id.mod_wis);
-        final TextView modCha = root.findViewById(R.id.mod_cha);
-        final TextView scoreStr = root.findViewById(R.id.score_str);
-        final TextView scoreDex = root.findViewById(R.id.score_dex);
-        final TextView scoreCon = root.findViewById(R.id.score_con);
-        final TextView scoreInt = root.findViewById(R.id.score_int);
-        final TextView scoreWis = root.findViewById(R.id.score_wis);
-        final TextView scoreCha = root.findViewById(R.id.score_cha);
-        
-        // Saving throws
-        final TextView saveStr = root.findViewById(R.id.save_str);
-        final TextView saveDex = root.findViewById(R.id.save_dex);
-        final TextView saveCon = root.findViewById(R.id.save_con);
-        final TextView saveInt = root.findViewById(R.id.save_int);
-        final TextView saveWis = root.findViewById(R.id.save_wis);
-        final TextView saveCha = root.findViewById(R.id.save_cha);
-
-        // Skills
-        final TextView skillAcr = root.findViewById(R.id.skill_acr);
-        final TextView skillAni = root.findViewById(R.id.skill_ani);
-        final TextView skillArc = root.findViewById(R.id.skill_arc);
-        final TextView skillAth = root.findViewById(R.id.skill_ath);
-        final TextView skillDec = root.findViewById(R.id.skill_dec);
-        final TextView skillIns = root.findViewById(R.id.skill_ins);
-        final TextView skillInt = root.findViewById(R.id.skill_int);
-        final TextView skillInv = root.findViewById(R.id.skill_inv);
-        final TextView skillHis = root.findViewById(R.id.skill_his);
-        final TextView skillMed = root.findViewById(R.id.skill_med);
-        final TextView skillNat = root.findViewById(R.id.skill_nat);
-        final TextView skillPrc = root.findViewById(R.id.skill_prc);
-        final TextView skillPrf = root.findViewById(R.id.skill_prf);
-        final TextView skillPrs = root.findViewById(R.id.skill_prs);
-        final TextView skillRel = root.findViewById(R.id.skill_rel);
-        final TextView skillSle = root.findViewById(R.id.skill_sle);
-        final TextView skillSte = root.findViewById(R.id.skill_ste);
-        final TextView skillSur = root.findViewById(R.id.skill_sur);
-        
+        getViews(root);
 
         characterViewModel.getFullCharacterDetailById(character_id).observe(getViewLifecycleOwner(), new Observer<CharacterDao.FullCharacterDetail>() {
             @Override
             public void onChanged(CharacterDao.FullCharacterDetail character) {
                 int level = character.getLevelFromXp(character.getXp());
-                getActivity().setTitle(getString(R.string.character_page_title,character.getCharName(),level,character.getClassName()));
+                getActivity().setTitle(getString(R.string.character_page_title, character.getCharName(), level, character.getClassName()));
+
                 // main stats
                 valClass.setText(character.getClassName());
                 valRace.setText(character.getRaceName());
@@ -132,10 +94,10 @@ public class ViewCharacterFragment extends Fragment {
                 valProfBonus.setText(String.valueOf(character.getProfBonusFromLevel(level)));
                 valAc.setText(String.valueOf(character.getArmour_class()));
                 valSpeed.setText(String.valueOf(character.getSpeed()));
-                valPassPerc.setText(String.valueOf(10 + character.getModifier("prc_skill")));
+                valPassPrc.setText(String.valueOf(10 + character.getModifier("prc_skill")));
                 valInitiative.setText(String.valueOf(character.getDEX()));
-                valHp.setText(getString(R.string.hp,character.getCurrent_HP(),character.getMax_HP()));
-                valHitDie.setText(getString(R.string.hit_die,character.getNum_hit_dice(),character.getHitDiceType()));
+                valHp.setText(getString(R.string.hp, character.getCurrent_HP(), character.getMax_HP()));
+                valHitDie.setText(getString(R.string.hit_die, character.getNum_hit_dice(), character.getHitDiceType()));
 
                 // Abilities
                 modStr.setText(String.valueOf(character.getModifier("str_base")));
@@ -150,7 +112,7 @@ public class ViewCharacterFragment extends Fragment {
                 scoreInt.setText(String.valueOf(character.getINT()));
                 scoreWis.setText(String.valueOf(character.getWIS()));
                 scoreCha.setText(String.valueOf(character.getCHA()));
-                
+
                 // Saving throws
                 saveStr.setText(String.valueOf(character.getModifier("str_save")));
                 saveDex.setText(String.valueOf(character.getModifier("dex_save")));
@@ -184,5 +146,64 @@ public class ViewCharacterFragment extends Fragment {
         });
         // Inflate the layout for this fragment
         return root;
+    }
+
+
+    private void getViews(View root) {
+        // Main stats
+        valClass = root.findViewById(R.id.val_class);
+        valRace = root.findViewById(R.id.val_race);
+        valAlignment = root.findViewById(R.id.val_alignment);
+        valBackground = root.findViewById(R.id.val_background);
+        valXp = root.findViewById(R.id.val_xp);
+        valProfBonus = root.findViewById(R.id.val_prof_bonus);
+        valAc = root.findViewById(R.id.val_ac);
+        valSpeed = root.findViewById(R.id.val_speed);
+        valPassPrc = root.findViewById(R.id.val_pass_perc);
+        valInitiative = root.findViewById(R.id.val_initiative);
+        valHp = root.findViewById(R.id.val_hp);
+        valHitDie = root.findViewById(R.id.val_hit_die);
+
+        // Abilities
+        modStr = root.findViewById(R.id.mod_str);
+        modDex = root.findViewById(R.id.mod_dex);
+        modCon = root.findViewById(R.id.mod_con);
+        modInt = root.findViewById(R.id.mod_int);
+        modWis = root.findViewById(R.id.mod_wis);
+        modCha = root.findViewById(R.id.mod_cha);
+        scoreStr = root.findViewById(R.id.score_str);
+        scoreDex = root.findViewById(R.id.score_dex);
+        scoreCon = root.findViewById(R.id.score_con);
+        scoreInt = root.findViewById(R.id.score_int);
+        scoreWis = root.findViewById(R.id.score_wis);
+        scoreCha = root.findViewById(R.id.score_cha);
+
+        // Saving throws
+        saveStr = root.findViewById(R.id.save_str);
+        saveDex = root.findViewById(R.id.save_dex);
+        saveCon = root.findViewById(R.id.save_con);
+        saveInt = root.findViewById(R.id.save_int);
+        saveWis = root.findViewById(R.id.save_wis);
+        saveCha = root.findViewById(R.id.save_cha);
+
+        // Skills
+        skillAcr = root.findViewById(R.id.skill_acr);
+        skillAni = root.findViewById(R.id.skill_ani);
+        skillArc = root.findViewById(R.id.skill_arc);
+        skillAth = root.findViewById(R.id.skill_ath);
+        skillDec = root.findViewById(R.id.skill_dec);
+        skillIns = root.findViewById(R.id.skill_ins);
+        skillInt = root.findViewById(R.id.skill_int);
+        skillInv = root.findViewById(R.id.skill_inv);
+        skillHis = root.findViewById(R.id.skill_his);
+        skillMed = root.findViewById(R.id.skill_med);
+        skillNat = root.findViewById(R.id.skill_nat);
+        skillPrc = root.findViewById(R.id.skill_prc);
+        skillPrf = root.findViewById(R.id.skill_prf);
+        skillPrs = root.findViewById(R.id.skill_prs);
+        skillRel = root.findViewById(R.id.skill_rel);
+        skillSle = root.findViewById(R.id.skill_sle);
+        skillSte = root.findViewById(R.id.skill_ste);
+        skillSur = root.findViewById(R.id.skill_sur);
     }
 }
