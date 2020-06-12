@@ -112,7 +112,7 @@ public class CharacterViewModel extends AndroidViewModel {
         repository.deleteProficiencies(proficiencies);
     }
 
-    public LiveData<Character> getCharacterById(int id) {
+    public LiveData<Character> getCharacterById(long id) {
         return repository.getCharacterById(id);
     }
     public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(long id) {

@@ -111,6 +111,9 @@ public class Character {
     public void setId(long id) {
         this.id = id;
     }
+    public void setCurrentHP(int newHp) {
+        this.currentHP = newHp;
+    }
 
     public long getId() {
         return id;

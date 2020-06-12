@@ -127,7 +127,7 @@ public class CharacterRepository {
         return allBackgrounds;
     }
 
-    public LiveData<Character> getCharacterById(int id) {
+    public LiveData<Character> getCharacterById(long id) {
         return characterDao.getCharacterById(id);
     }
 
@@ -171,6 +171,8 @@ public class CharacterRepository {
     public void deleteProficiencies(Proficiencies proficiencies) {
         new DeleteProficienciesAsyncTask(proficiencyDao).execute(proficiencies);
     }
+
+
 
 
     private static class InsertCharacterAsyncTask extends AsyncTask<Character, Void, Long> {

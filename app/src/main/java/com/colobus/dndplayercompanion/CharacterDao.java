@@ -2,13 +2,10 @@ package com.colobus.dndplayercompanion;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
-
-import com.colobus.dndplayercompanion.Character.*;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +27,7 @@ public interface CharacterDao {
     LiveData<List<Character>> getAllCharacters();
 
     @Query("SELECT * FROM character_table WHERE id = :id")
-    LiveData<Character> getCharacterById(int id);
+    LiveData<Character> getCharacterById(long id);
 
     @Query("SELECT CH.id AS id, CH.name AS charName, CH.XP AS xp, CL.name AS className, R.name AS raceName " +
             "FROM character_table CH " +

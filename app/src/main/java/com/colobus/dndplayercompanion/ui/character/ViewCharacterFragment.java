@@ -13,7 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.colobus.dndplayercompanion.Character;
 import com.colobus.dndplayercompanion.CharacterDao;
@@ -23,7 +26,7 @@ import com.colobus.dndplayercompanion.R;
 import org.jetbrains.annotations.NotNull;
 
 
-public class ViewCharacterFragment extends Fragment {
+public class ViewCharacterFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     private static final String CHARACTER_ID = "character_id";
     private CharacterViewModel characterViewModel;
@@ -44,6 +47,10 @@ public class ViewCharacterFragment extends Fragment {
     TextView skillAcr, skillAni, skillArc, skillAth, skillDec, skillIns;
     TextView skillInt, skillInv, skillHis, skillMed, skillNat, skillPrc;
     TextView skillPrf, skillPrs, skillRel, skillSle, skillSte, skillSur;
+
+    Button btnHeal, btnDamage, btnShortRest, btnLongRest;
+    EditText editHp;
+    private int currentHp, maxHp, numHitDice, level;
 
 
     // TODO: Rename and change types of parameters
@@ -89,7 +96,7 @@ public class ViewCharacterFragment extends Fragment {
         characterViewModel.getFullCharacterDetailById(character_id).observe(getViewLifecycleOwner(), new Observer<CharacterDao.FullCharacterDetail>() {
             @Override
             public void onChanged(CharacterDao.FullCharacterDetail character) {
-                int level = character.getLevelFromXp(character.getXp());
+                level = character.getLevelFromXp(character.getXp());
                 getActivity().setTitle(getString(R.string.character_page_title, character.getCharName(), level, character.getClassName()));
 
                 // main stats
@@ -103,8 +110,11 @@ public class ViewCharacterFragment extends Fragment {
                 valSpeed.setText(String.valueOf(character.getSpeed()));
                 valPassPrc.setText(String.valueOf(10 + character.getModifier("prc_skill")));
                 valInitiative.setText(String.valueOf(character.getDEX()));
-                valHp.setText(getString(R.string.hp, character.getCurrent_HP(), character.getMax_HP()));
-                valHitDie.setText(getString(R.string.hit_die, character.getNum_hit_dice(), character.getHitDiceType()));
+                currentHp = character.getCurrent_HP();
+                maxHp = character.getMax_HP();
+                valHp.setText(getString(R.string.hp, currentHp, maxHp));
+                numHitDice = character.getNum_hit_dice();
+                valHitDie.setText(getString(R.string.hit_die, numHitDice, character.getHitDiceType()));
 
                 // Abilities
                 modStr.setText(String.valueOf(character.getModifier("str_base")));
@@ -212,6 +222,17 @@ public class ViewCharacterFragment extends Fragment {
         skillSle = root.findViewById(R.id.skill_sle);
         skillSte = root.findViewById(R.id.skill_ste);
         skillSur = root.findViewById(R.id.skill_sur);
+
+        // buttons
+        editHp = root.findViewById(R.id.edit_hp);
+        btnDamage = root.findViewById(R.id.btn_damage);
+        btnDamage.setOnClickListener(this);
+        btnHeal = root.findViewById(R.id.btn_heal);
+        btnHeal.setOnClickListener(this);
+        btnLongRest = root.findViewById(R.id.btn_long_rest);
+        btnLongRest.setOnClickListener(this);
+        btnShortRest = root.findViewById(R.id.btn_short_rest);
+        btnShortRest.setOnClickListener(this);
     }
 
     private void editCharacter(long character_id) {
@@ -233,5 +254,35 @@ public class ViewCharacterFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_damage:
+                int damageAmount = Integer.parseInt(editHp.getText().toString());
+                int newHp = currentHp - damageAmount;
+                if (newHp < 1) {
+                    newHp = 0;
+                } else if (newHp > maxHp) {
+                    newHp = maxHp;
+                }
+//                Character character = buildCharacter(character_id,newHp)
+//                characterViewModel.updateCharacter(character);
+
+                Toast.makeText(getActivity(), "Damage taken: " + damageAmount + " HP", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_heal:
+                //2
+                break;
+            case R.id.btn_short_rest:
+                //3
+                break;
+            case R.id.btn_long_rest:
+                //4
+                break;
+            default:
+                break;
+        }
     }
 }
