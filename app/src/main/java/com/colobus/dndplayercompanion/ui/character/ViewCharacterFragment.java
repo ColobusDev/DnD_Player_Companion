@@ -25,6 +25,8 @@ import com.colobus.dndplayercompanion.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public class ViewCharacterFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -50,7 +52,7 @@ public class ViewCharacterFragment extends Fragment implements View.OnClickListe
 
     Button btnHeal, btnDamage, btnShortRest, btnLongRest;
     EditText editHp;
-    private int currentHp, maxHp, numHitDice, level;
+    private int currentHp, maxHp, numHitDice, hitDiceType, level;
 
 
     // TODO: Rename and change types of parameters
@@ -109,12 +111,13 @@ public class ViewCharacterFragment extends Fragment implements View.OnClickListe
                 valAc.setText(String.valueOf(character.getArmour_class()));
                 valSpeed.setText(String.valueOf(character.getSpeed()));
                 valPassPrc.setText(String.valueOf(10 + character.getModifier("prc_skill")));
-                valInitiative.setText(String.valueOf(character.getDEX()));
+                valInitiative.setText(String.valueOf(character.getModifier("dex_base")));
                 currentHp = character.getCurrent_HP();
                 maxHp = character.getMax_HP();
                 valHp.setText(getString(R.string.hp, currentHp, maxHp));
                 numHitDice = character.getNum_hit_dice();
-                valHitDie.setText(getString(R.string.hit_die, numHitDice, character.getHitDiceType()));
+                hitDiceType = character.getHitDiceType();
+                valHitDie.setText(getString(R.string.hit_die, numHitDice, hitDiceType));
 
                 // Abilities
                 modStr.setText(String.valueOf(character.getModifier("str_base")));
@@ -258,30 +261,58 @@ public class ViewCharacterFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        int newHp;
+        int newHitDice;
         switch (v.getId()) {
             case R.id.btn_damage:
-                int damageAmount = Integer.parseInt(editHp.getText().toString());
-                int newHp = currentHp - damageAmount;
-                if (newHp < 1) {
-                    newHp = 0;
-                } else if (newHp > maxHp) {
-                    newHp = maxHp;
-                }
-                characterViewModel.updateCharacterHp(character_id, numHitDice, newHp);
-
-                Toast.makeText(getActivity(), "Damage taken: " + damageAmount + " HP", Toast.LENGTH_SHORT).show();
+                int healAmount = -Integer.parseInt(editHp.getText().toString());
+                int actualHealAmount = updateCharacterHpAndHitDice(healAmount, numHitDice);
+                Toast.makeText(getActivity(), "Damage taken: " + actualHealAmount + " HP", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_heal:
-                Toast.makeText(getActivity(), "Healed: " + 1 + " HP", Toast.LENGTH_SHORT).show();
+                healAmount = Integer.parseInt(editHp.getText().toString());
+                actualHealAmount = updateCharacterHpAndHitDice(healAmount, numHitDice);
+                Toast.makeText(getActivity(), "Healed: " + actualHealAmount + " HP", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_short_rest:
-                Toast.makeText(getActivity(), "Short rest", Toast.LENGTH_SHORT).show();
+                if (numHitDice > 0) {
+                    newHitDice = numHitDice - 1;
+                    healAmount = ThreadLocalRandom.current().nextInt(1, hitDiceType + 1);
+                    healAmount += Integer.parseInt(modCon.getText().toString());
+                    actualHealAmount = updateCharacterHpAndHitDice(healAmount, newHitDice);
+                    Toast.makeText(getActivity(), "Short rest, healed " + actualHealAmount + " HP", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "No hit dice left, cannot heal", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btn_long_rest:
-                Toast.makeText(getActivity(), "Long rest", Toast.LENGTH_SHORT).show();
+                int numRegainedHitDice = (int) Math.floor((double) level / 2);
+                if (numRegainedHitDice < 1) {
+                    numRegainedHitDice = 0;
+                }
+                newHitDice = numHitDice + numRegainedHitDice;
+                if (newHitDice > level) {
+                    newHitDice = level;
+                }
+                int actualHitDiceRegained = newHitDice - numHitDice;
+                newHp = maxHp;
+                characterViewModel.updateCharacterHp(character_id, newHitDice, newHp);
+                Toast.makeText(getActivity(), "Long rest, healed to full. " + actualHitDiceRegained + " hit dice regained", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;
         }
+    }
+
+    private int updateCharacterHpAndHitDice(int healAmount, int newHitDice) {
+        int newHp = currentHp + healAmount;
+        if (newHp < 1) {
+            newHp = 0;
+        } else if (newHp > maxHp) {
+            newHp = maxHp;
+        }
+        characterViewModel.updateCharacterHp(character_id, newHitDice, newHp);
+        int actualHealAmount = newHp - currentHp;
+        return Math.abs(actualHealAmount);
     }
 }
