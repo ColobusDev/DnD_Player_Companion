@@ -118,6 +118,12 @@ public class CharacterViewModel extends AndroidViewModel {
     public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(long id) {
         return repository.getFullCharacterDetailById(id);
     }
+    public LiveData<CharacterDao.CharacterDetailsForEdit> getCharacterDetailsForEdit(long character_id) {
+        return repository.getCharacterDetailsForEdit(character_id);
+    }
+    public LiveData<Proficiencies> getProfFromCharacterId(long character_id) {
+        return  repository.getProfFromCharacterId(character_id);
+    }
     public LiveData<Race> getRaceById(int race_id) {
         return repository.getRaceById(race_id);
     }

@@ -41,8 +41,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class AddCharacterFragment extends Fragment {
+    private static final String CHARACTER_ID = "character_id";
+    private long character_id;
+    private int profId;
+
     private CharacterViewModel characterViewModel;
     Spinner spinnerRace, spinnerClass, spinnerBackground, spinnerAlignment;
+    ArrayAdapter<Race> raceArrayAdapter;
+    ArrayAdapter<CharClass> charClassArrayAdapter;
+    ArrayAdapter<Background> backgroundArrayAdapter;
+    ArrayAdapter<Alignment> alignmentArrayAdapter;
     EditText editCharacterName, editAc, editSpeed, editHp, editXp;
     EditText editStr, editDex, editCon, editInt, editWis, editCha;
 
@@ -57,14 +65,24 @@ public class AddCharacterFragment extends Fragment {
     Spinner spinnerSkillPrf, spinnerSkillPrs, spinnerSkillRel;
     Spinner spinnerSkillSle, spinnerSkillSte, spinnerSkillSur;
 
-    ProficiencySpinnerAdapter adapter;
+    ProficiencySpinnerAdapter proficiencySpinnerAdapter;
 
-    Button btnSave;
+
+    public static AddCharacterFragment newInstance(long character_id) {
+        AddCharacterFragment fragment = new AddCharacterFragment();
+        Bundle args = new Bundle();
+        args.putLong(CHARACTER_ID, character_id);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
+        if (getArguments() != null) {
+            character_id = getArguments().getLong(CHARACTER_ID);
+        }
     }
 
 
@@ -75,69 +93,132 @@ public class AddCharacterFragment extends Fragment {
         getActivity().setTitle("Add Character");
         getViews(root);
 
-        adapter = new ProficiencySpinnerAdapter(getActivity(), R.layout.spinner_item,
+        proficiencySpinnerAdapter = new ProficiencySpinnerAdapter(getActivity(), R.layout.spinner_item,
                 getResources().getStringArray(R.array.proficiency_spinner),
                 getResources().getStringArray(R.array.proficiency_spinner_short));
 
-        spinnerSkillAcr.setAdapter(adapter);
-        spinnerSkillAni.setAdapter(adapter);
-        spinnerSkillArc.setAdapter(adapter);
-        spinnerSkillAth.setAdapter(adapter);
-        spinnerSkillDec.setAdapter(adapter);
-        spinnerSkillHis.setAdapter(adapter);
-        spinnerSkillIns.setAdapter(adapter);
-        spinnerSkillInt.setAdapter(adapter);
-        spinnerSkillInv.setAdapter(adapter);
-        spinnerSkillMed.setAdapter(adapter);
-        spinnerSkillNat.setAdapter(adapter);
-        spinnerSkillPrc.setAdapter(adapter);
-        spinnerSkillPrf.setAdapter(adapter);
-        spinnerSkillPrs.setAdapter(adapter);
-        spinnerSkillRel.setAdapter(adapter);
-        spinnerSkillSle.setAdapter(adapter);
-        spinnerSkillSte.setAdapter(adapter);
-        spinnerSkillSur.setAdapter(adapter);
+        spinnerSkillAcr.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillAni.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillArc.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillAth.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillDec.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillHis.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillIns.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillInt.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillInv.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillMed.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillNat.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillPrc.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillPrf.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillPrs.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillRel.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillSle.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillSte.setAdapter(proficiencySpinnerAdapter);
+        spinnerSkillSur.setAdapter(proficiencySpinnerAdapter);
 
-
-        btnSave = root.findViewById(R.id.button_save);
 
         characterViewModel.getAllRaces().observe(getViewLifecycleOwner(), new Observer<List<Race>>() {
             @Override
             public void onChanged(List<Race> races) {
-                ArrayAdapter<Race> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, races);
-                spinnerRace.setAdapter(adapter);
+                raceArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, races);
+                spinnerRace.setAdapter(raceArrayAdapter);
             }
         });
         characterViewModel.getAllCharClasses().observe(getViewLifecycleOwner(), new Observer<List<CharClass>>() {
             @Override
             public void onChanged(List<CharClass> charClasses) {
-                ArrayAdapter<CharClass> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, charClasses);
-                spinnerClass.setAdapter(adapter);
+                charClassArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, charClasses);
+                spinnerClass.setAdapter(charClassArrayAdapter);
             }
         });
         characterViewModel.getAllAlignments().observe(getViewLifecycleOwner(), new Observer<List<Alignment>>() {
             @Override
             public void onChanged(List<Alignment> alignments) {
-                ArrayAdapter<Alignment> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, alignments);
-                spinnerAlignment.setAdapter(adapter);
+                alignmentArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, alignments);
+                spinnerAlignment.setAdapter(alignmentArrayAdapter);
             }
         });
         characterViewModel.getAllBackgrounds().observe(getViewLifecycleOwner(), new Observer<List<Background>>() {
             @Override
             public void onChanged(List<Background> backgrounds) {
-                ArrayAdapter<Background> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, backgrounds);
-                spinnerBackground.setAdapter(adapter);
+                backgroundArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, backgrounds);
+                spinnerBackground.setAdapter(backgroundArrayAdapter);
             }
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveCharacter();
-            }
-        });
+        if (character_id > 0) {
+            loadCharacterDetails();
+        }
 
         return root;
+    }
+
+    private void loadCharacterDetails() {
+        characterViewModel.getCharacterDetailsForEdit(character_id).observe(getViewLifecycleOwner(), new Observer<CharacterDao.CharacterDetailsForEdit>() {
+            @Override
+            public void onChanged(CharacterDao.CharacterDetailsForEdit characterDetails) {
+                // mains stats & details
+                editCharacterName.setText(characterDetails.getCharName());
+                spinnerAlignment.setSelection(characterDetails.getAlignment_id() - 1);
+                spinnerBackground.setSelection(characterDetails.getBackground_id() - 1);
+                spinnerClass.setSelection(characterDetails.getClass_id() - 1);
+                spinnerRace.setSelection(characterDetails.getRace_id() - 1);
+                editAc.setText(String.valueOf(characterDetails.getArmour_class()));
+                editHp.setText(String.valueOf(characterDetails.getMax_HP()));
+                editXp.setText(String.valueOf(characterDetails.getXp()));
+                editSpeed.setText(String.valueOf(characterDetails.getSpeed()));
+
+                //abilities
+                editStr.setText(String.valueOf(characterDetails.getSTR()));
+                editDex.setText(String.valueOf(characterDetails.getDEX()));
+                editCon.setText(String.valueOf(characterDetails.getCON()));
+                editInt.setText(String.valueOf(characterDetails.getINT()));
+                editWis.setText(String.valueOf(characterDetails.getWIS()));
+                editCha.setText(String.valueOf(characterDetails.getCHA()));
+
+                // saving throw proficiencies
+                checkSaveStr.setChecked(characterDetails.getSave_proficiency_str() == 1);
+                checkSaveDex.setChecked(characterDetails.getSave_proficiency_dex() == 1);
+                checkSaveCon.setChecked(characterDetails.getSave_proficiency_con() == 1);
+                checkSaveInt.setChecked(characterDetails.getSave_proficiency_int() == 1);
+                checkSaveWis.setChecked(characterDetails.getSave_proficiency_wis() == 1);
+                checkSaveCha.setChecked(characterDetails.getSave_proficiency_cha() == 1);
+
+                // skill proficiencies
+                spinnerSkillAcr.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_acr()));
+                spinnerSkillAni.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_ani()));
+                spinnerSkillArc.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_arc()));
+                spinnerSkillAth.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_ath()));
+                spinnerSkillDec.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_dec()));
+                spinnerSkillHis.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_his()));
+                spinnerSkillIns.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_ins()));
+                spinnerSkillInt.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_int()));
+                spinnerSkillInv.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_inv()));
+                spinnerSkillMed.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_med()));
+                spinnerSkillNat.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_nat()));
+                spinnerSkillPrc.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_prc()));
+                spinnerSkillPrf.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_prf()));
+                spinnerSkillPrs.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_prs()));
+                spinnerSkillRel.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_rel()));
+                spinnerSkillSle.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_sle()));
+                spinnerSkillSte.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_ste()));
+                spinnerSkillSur.setSelection(getSkillProfSpinnerIndex(characterDetails.getSkill_proficiency_sur()));
+
+                profId = characterDetails.getProficiency_id();
+            }
+        });
+    }
+
+    private int getSkillProfSpinnerIndex(double multiplier) {
+        if (multiplier < 0.5) {
+            return 0;
+        } else if (multiplier < 1) {
+            return 2;
+        } else if (multiplier < 2) {
+            return 1;
+        } else {
+            return 3;
+        }
     }
 
     private void getViews(View root) {
@@ -290,17 +371,25 @@ public class AddCharacterFragment extends Fragment {
                 strength, dexterity, constitution, intelligence, wisdom, charisma,
                 hp, hp, ac, xp, speed, level);
 
-        long character_id;
-        try {
-            character_id = characterViewModel.insertCharacter(character);
+        long newCharacterId;
+        if (character_id > 0) {
+            character.setId(character_id);
+            characterViewModel.updateCharacter(character);
             Proficiencies proficiencies = buildProficiency(character_id);
-            characterViewModel.insertProficiencies(proficiencies);
-            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putLong("CURRENT_CHARACTER_ID", character_id);
-            editor.apply();
-        } catch (Exception e) {
-            e.printStackTrace();
+            proficiencies.setId(profId);
+            characterViewModel.updateProficiencies(proficiencies);
+        } else {
+            try {
+                newCharacterId = characterViewModel.insertCharacter(character);
+                Proficiencies proficiencies = buildProficiency(newCharacterId);
+                characterViewModel.insertProficiencies(proficiencies);
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putLong("CURRENT_CHARACTER_ID", newCharacterId);
+                editor.apply();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -336,22 +425,20 @@ public class AddCharacterFragment extends Fragment {
                 getSkillProfMultiplier(spinnerSkillSur.getSelectedItem().toString()));
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        MenuInflater menuInflater = getActivity().getMenuInflater();
-//        menuInflater.inflate(R.menu.add_character_menu, menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.save_character:
-//                saveCharacter();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuInflater menuInflater = getActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.add_character_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.save_character) {
+            saveCharacter();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 //
 //    public void saveCharacter() {
 //

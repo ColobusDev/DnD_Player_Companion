@@ -43,7 +43,7 @@ public class CharacterRepository {
     }
 
     // character insert, update etc
-    public long insertCharacter(Character character) throws Exception{
+    public long insertCharacter(Character character) throws Exception {
         return new InsertCharacterAsyncTask(characterDao).execute(character).get();
     }
 
@@ -133,6 +133,14 @@ public class CharacterRepository {
 
     public LiveData<CharacterDao.FullCharacterDetail> getFullCharacterDetailById(long id) {
         return characterDao.getFullCharacterDetailById(id);
+    }
+
+    public LiveData<CharacterDao.CharacterDetailsForEdit> getCharacterDetailsForEdit(long character_id) {
+        return characterDao.getEditCharacterDetails(character_id);
+    }
+
+    public LiveData<Proficiencies> getProfFromCharacterId(long character_id) {
+        return proficiencyDao.getProfIdFromCharacterId(character_id);
     }
 
     public LiveData<Race> getRaceById(int race_id) {

@@ -54,4 +54,5 @@
     <string name="stealth">Stealth</string>
     <string name="survival">Survival</string>
     <string name="title_dice">Dice</string>
+    <string name="edit_character_menu_item">Edit character</string>
 </resources>

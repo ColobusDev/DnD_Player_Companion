@@ -8,13 +8,19 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.colobus.dndplayercompanion.Character;
 import com.colobus.dndplayercompanion.CharacterDao;
+import com.colobus.dndplayercompanion.MainActivity;
 import com.colobus.dndplayercompanion.R;
+
+import org.jetbrains.annotations.NotNull;
 
 
 public class ViewCharacterFragment extends Fragment {
@@ -65,6 +71,7 @@ public class ViewCharacterFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             character_id = getArguments().getLong(CHARACTER_ID);
@@ -205,5 +212,26 @@ public class ViewCharacterFragment extends Fragment {
         skillSle = root.findViewById(R.id.skill_sle);
         skillSte = root.findViewById(R.id.skill_ste);
         skillSur = root.findViewById(R.id.skill_sur);
+    }
+
+    private void editCharacter(long character_id) {
+        Fragment fragment = AddCharacterFragment.newInstance(character_id);
+        String fragmentTag = "EDIT_CHARACTER";
+        ((MainActivity) getActivity()).navigateToFragment(fragment, fragmentTag);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NotNull MenuInflater inflater) {
+        MenuInflater menuInflater = getActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.view_character_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.edit_character) {
+            editCharacter(character_id);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
