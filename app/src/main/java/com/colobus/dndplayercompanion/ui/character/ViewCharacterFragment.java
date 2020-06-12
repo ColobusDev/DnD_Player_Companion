@@ -267,19 +267,18 @@ public class ViewCharacterFragment extends Fragment implements View.OnClickListe
                 } else if (newHp > maxHp) {
                     newHp = maxHp;
                 }
-//                Character character = buildCharacter(character_id,newHp)
-//                characterViewModel.updateCharacter(character);
+                characterViewModel.updateCharacterHp(character_id, numHitDice, newHp);
 
                 Toast.makeText(getActivity(), "Damage taken: " + damageAmount + " HP", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_heal:
-                //2
+                Toast.makeText(getActivity(), "Healed: " + 1 + " HP", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_short_rest:
-                //3
+                Toast.makeText(getActivity(), "Short rest", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_long_rest:
-                //4
+                Toast.makeText(getActivity(), "Long rest", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

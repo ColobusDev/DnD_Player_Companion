@@ -55,6 +55,10 @@ public class CharacterRepository {
         new DeleteCharacterAsyncTask(characterDao).execute(characterId);
     }
 
+    public void updateCharacterHp(long character_id, int numHitDice, int newHp) {
+        new UpdateCharacterHpAsyncTask(characterDao, character_id, numHitDice, newHp).execute();
+    }
+
     public LiveData<List<Character>> getAllCharacters() {
         return allCharacters;
     }
@@ -173,8 +177,6 @@ public class CharacterRepository {
     }
 
 
-
-
     private static class InsertCharacterAsyncTask extends AsyncTask<Character, Void, Long> {
         private CharacterDao characterDao;
 
@@ -212,6 +214,26 @@ public class CharacterRepository {
         @Override
         protected Void doInBackground(Long... ints) {
             characterDao.delete(ints[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateCharacterHpAsyncTask extends AsyncTask<Void, Void, Void> {
+        private CharacterDao characterDao;
+        private long character_id;
+        private int numHitDice;
+        private int newHp;
+
+        public UpdateCharacterHpAsyncTask(CharacterDao characterDao, long character_id, int numHitDice, int newHp) {
+            this.characterDao = characterDao;
+            this.character_id = character_id;
+            this.numHitDice = numHitDice;
+            this.newHp = newHp;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            characterDao.updateCharacterHp(character_id, numHitDice, newHp);
             return null;
         }
     }

@@ -29,6 +29,10 @@ public interface CharacterDao {
     @Query("SELECT * FROM character_table WHERE id = :id")
     LiveData<Character> getCharacterById(long id);
 
+    @Query("UPDATE character_table SET num_hit_dice = :numHitDice, current_HP = :newHp " +
+            "WHERE id = :character_id")
+    void updateCharacterHp(long character_id, int numHitDice, int newHp);
+
     @Query("SELECT CH.id AS id, CH.name AS charName, CH.XP AS xp, CL.name AS className, R.name AS raceName " +
             "FROM character_table CH " +
             "JOIN class_table CL ON CH.class_id = CL.id " +
