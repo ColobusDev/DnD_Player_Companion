@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -44,6 +45,7 @@ public class AddCharacterFragment extends Fragment {
     private static final String CHARACTER_ID = "character_id";
     private long character_id;
     private int profId;
+    private boolean isNewCharacter;
 
     private CharacterViewModel characterViewModel;
     Spinner spinnerRace, spinnerClass, spinnerBackground, spinnerAlignment;
@@ -82,6 +84,9 @@ public class AddCharacterFragment extends Fragment {
         setHasOptionsMenu(true);
         if (getArguments() != null) {
             character_id = getArguments().getLong(CHARACTER_ID);
+            isNewCharacter = false;
+        } else {
+            isNewCharacter = true;
         }
     }
 
@@ -133,7 +138,12 @@ public class AddCharacterFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         CharClass selectedClass = charClasses.get(position);
-                        tickProfsForSelectedClass(selectedClass);
+                        if (isNewCharacter) {
+                            tickProfsForSelectedClass(selectedClass);
+                        } else if (spinnerClass.getTag().equals(1)) {
+                            tickProfsForSelectedClass(selectedClass);
+                        }
+                        spinnerClass.setTag(0);
                     }
 
                     @Override
@@ -158,7 +168,7 @@ public class AddCharacterFragment extends Fragment {
             }
         });
 
-        if (character_id > 0) {
+        if (!isNewCharacter) {
             loadCharacterDetails();
         }
 
@@ -265,6 +275,14 @@ public class AddCharacterFragment extends Fragment {
 
         spinnerRace = root.findViewById(R.id.spinner_race);
         spinnerClass = root.findViewById(R.id.spinner_class);
+        spinnerClass.setTag(0);
+        spinnerClass.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                spinnerClass.setTag(1);
+                return false;
+            }
+        });
         spinnerBackground = root.findViewById(R.id.spinner_background);
         spinnerAlignment = root.findViewById(R.id.spinner_alignment);
         editCharacterName = root.findViewById(R.id.edit_char_name);
@@ -412,7 +430,7 @@ public class AddCharacterFragment extends Fragment {
                 hp, hp, ac, xp, speed, level);
 
         long newCharacterId;
-        if (character_id > 0) {
+        if (!isNewCharacter) {
             character.setId(character_id);
             characterViewModel.updateCharacter(character);
             Proficiencies proficiencies = buildProficiency(character_id);
