@@ -1,0 +1,569 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 3,
+    "identityHash": "84b7952cb694c4618d707e1b9d3073a2",
+    "entities": [
+      {
+        "tableName": "character_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `race_id` INTEGER NOT NULL, `class_id` INTEGER NOT NULL, `background_id` INTEGER NOT NULL, `alignment_id` INTEGER NOT NULL, `STR` INTEGER NOT NULL, `DEX` INTEGER NOT NULL, `CON` INTEGER NOT NULL, `INT` INTEGER NOT NULL, `WIS` INTEGER NOT NULL, `CHA` INTEGER NOT NULL, `max_HP` INTEGER NOT NULL, `current_HP` INTEGER NOT NULL, `armour_class` INTEGER NOT NULL, `XP` INTEGER NOT NULL, `speed` INTEGER NOT NULL, `num_hit_dice` INTEGER NOT NULL, FOREIGN KEY(`class_id`) REFERENCES `class_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`background_id`) REFERENCES `background_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`alignment_id`) REFERENCES `alignment_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`race_id`) REFERENCES `race_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "charName",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "raceId",
+            "columnName": "race_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "classId",
+            "columnName": "class_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "backgroundId",
+            "columnName": "background_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alignmentId",
+            "columnName": "alignment_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "strength",
+            "columnName": "STR",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dexterity",
+            "columnName": "DEX",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "constitution",
+            "columnName": "CON",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "intelligence",
+            "columnName": "INT",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wisdom",
+            "columnName": "WIS",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "charisma",
+            "columnName": "CHA",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxHP",
+            "columnName": "max_HP",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentHP",
+            "columnName": "current_HP",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "armourClass",
+            "columnName": "armour_class",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentXP",
+            "columnName": "XP",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "speed",
+            "columnName": "speed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "numHitDice",
+            "columnName": "num_hit_dice",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_character_table_race_id",
+            "unique": false,
+            "columnNames": [
+              "race_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_character_table_race_id` ON `${TABLE_NAME}` (`race_id`)"
+          },
+          {
+            "name": "index_character_table_class_id",
+            "unique": false,
+            "columnNames": [
+              "class_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_character_table_class_id` ON `${TABLE_NAME}` (`class_id`)"
+          },
+          {
+            "name": "index_character_table_background_id",
+            "unique": false,
+            "columnNames": [
+              "background_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_character_table_background_id` ON `${TABLE_NAME}` (`background_id`)"
+          },
+          {
+            "name": "index_character_table_alignment_id",
+            "unique": false,
+            "columnNames": [
+              "alignment_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_character_table_alignment_id` ON `${TABLE_NAME}` (`alignment_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "class_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "class_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "background_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "background_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "alignment_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "alignment_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          },
+          {
+            "table": "race_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "race_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "class_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `hitDiceType` INTEGER NOT NULL, `spellAbility` TEXT, `save_proficiencies` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "className",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hitDiceType",
+            "columnName": "hitDiceType",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "spellAbility",
+            "columnName": "spellAbility",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "saveProficiencies",
+            "columnName": "save_proficiencies",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "race_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `strength_bonus` INTEGER NOT NULL, `dexterity_bonus` INTEGER NOT NULL, `constitution_bonus` INTEGER NOT NULL, `intelligence_bonus` INTEGER NOT NULL, `wisdom_bonus` INTEGER NOT NULL, `charisma_bonus` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "race",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "strengthBonus",
+            "columnName": "strength_bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dexterityBonus",
+            "columnName": "dexterity_bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "constitutionBonus",
+            "columnName": "constitution_bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "intelligenceBonus",
+            "columnName": "intelligence_bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wisdomBonus",
+            "columnName": "wisdom_bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "charismaBonus",
+            "columnName": "charisma_bonus",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "alignment_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `short_name` TEXT, `name` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shortName",
+            "columnName": "short_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "background_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "proficiencies",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `character_id` INTEGER NOT NULL, `save_proficiency_str` INTEGER NOT NULL, `save_proficiency_dex` INTEGER NOT NULL, `save_proficiency_con` INTEGER NOT NULL, `save_proficiency_int` INTEGER NOT NULL, `save_proficiency_wis` INTEGER NOT NULL, `save_proficiency_cha` INTEGER NOT NULL, `skill_proficiency_acr` REAL NOT NULL, `skill_proficiency_ani` REAL NOT NULL, `skill_proficiency_arc` REAL NOT NULL, `skill_proficiency_ath` REAL NOT NULL, `skill_proficiency_dec` REAL NOT NULL, `skill_proficiency_his` REAL NOT NULL, `skill_proficiency_ins` REAL NOT NULL, `skill_proficiency_int` REAL NOT NULL, `skill_proficiency_inv` REAL NOT NULL, `skill_proficiency_med` REAL NOT NULL, `skill_proficiency_nat` REAL NOT NULL, `skill_proficiency_prc` REAL NOT NULL, `skill_proficiency_prf` REAL NOT NULL, `skill_proficiency_prs` REAL NOT NULL, `skill_proficiency_rel` REAL NOT NULL, `skill_proficiency_sle` REAL NOT NULL, `skill_proficiency_ste` REAL NOT NULL, `skill_proficiency_sur` REAL NOT NULL, FOREIGN KEY(`character_id`) REFERENCES `character_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "characterId",
+            "columnName": "character_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saveProfStr",
+            "columnName": "save_proficiency_str",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saveProfDex",
+            "columnName": "save_proficiency_dex",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saveProfCon",
+            "columnName": "save_proficiency_con",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saveProfInt",
+            "columnName": "save_proficiency_int",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saveProfWis",
+            "columnName": "save_proficiency_wis",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saveProfCha",
+            "columnName": "save_proficiency_cha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfAcr",
+            "columnName": "skill_proficiency_acr",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfAni",
+            "columnName": "skill_proficiency_ani",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfArc",
+            "columnName": "skill_proficiency_arc",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfAth",
+            "columnName": "skill_proficiency_ath",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfDec",
+            "columnName": "skill_proficiency_dec",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfHis",
+            "columnName": "skill_proficiency_his",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfIns",
+            "columnName": "skill_proficiency_ins",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfInt",
+            "columnName": "skill_proficiency_int",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfInv",
+            "columnName": "skill_proficiency_inv",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfMed",
+            "columnName": "skill_proficiency_med",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfNat",
+            "columnName": "skill_proficiency_nat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfPrc",
+            "columnName": "skill_proficiency_prc",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfPrf",
+            "columnName": "skill_proficiency_prf",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfPrs",
+            "columnName": "skill_proficiency_prs",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfRel",
+            "columnName": "skill_proficiency_rel",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfSle",
+            "columnName": "skill_proficiency_sle",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfSte",
+            "columnName": "skill_proficiency_ste",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "skillProfSur",
+            "columnName": "skill_proficiency_sur",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_proficiencies_character_id",
+            "unique": false,
+            "columnNames": [
+              "character_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_proficiencies_character_id` ON `${TABLE_NAME}` (`character_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "character_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "character_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '84b7952cb694c4618d707e1b9d3073a2')"
+    ]
+  }
+}
