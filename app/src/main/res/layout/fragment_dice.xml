@@ -302,7 +302,7 @@
             android:id="@+id/reset_dice_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reset"
+            android:text="@string/reset_button"
             android:layout_gravity="center"/>
 
     </LinearLayout>

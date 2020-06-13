@@ -57,4 +57,5 @@
     <string name="edit_character_menu_item">Edit character</string>
     <string name="roll_button">Roll</string>
     <string name="default_dice_value">0</string>
+    <string name="reset_button">Reset</string>
 </resources>
