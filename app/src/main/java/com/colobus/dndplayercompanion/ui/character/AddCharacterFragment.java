@@ -126,9 +126,21 @@ public class AddCharacterFragment extends Fragment {
         });
         characterViewModel.getAllCharClasses().observe(getViewLifecycleOwner(), new Observer<List<CharClass>>() {
             @Override
-            public void onChanged(List<CharClass> charClasses) {
+            public void onChanged(final List<CharClass> charClasses) {
                 charClassArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, charClasses);
                 spinnerClass.setAdapter(charClassArrayAdapter);
+                spinnerClass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        CharClass selectedClass = charClasses.get(position);
+                        tickProfsForSelectedClass(selectedClass);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
             }
         });
         characterViewModel.getAllAlignments().observe(getViewLifecycleOwner(), new Observer<List<Alignment>>() {
@@ -151,6 +163,34 @@ public class AddCharacterFragment extends Fragment {
         }
 
         return root;
+    }
+
+    private void tickProfsForSelectedClass(CharClass selectedClass) {
+        String saveProfs = selectedClass.getSaveProficiencies();
+        checkSaveStr.setChecked(false);
+        checkSaveDex.setChecked(false);
+        checkSaveCon.setChecked(false);
+        checkSaveInt.setChecked(false);
+        checkSaveWis.setChecked(false);
+        checkSaveCha.setChecked(false);
+        if (saveProfs.contains("STR")) {
+            checkSaveStr.setChecked(true);
+        }
+        if (saveProfs.contains("DEX")) {
+            checkSaveDex.setChecked(true);
+        }
+        if (saveProfs.contains("CON")) {
+            checkSaveCon.setChecked(true);
+        }
+        if (saveProfs.contains("INT")) {
+            checkSaveInt.setChecked(true);
+        }
+        if (saveProfs.contains("WIS")) {
+            checkSaveWis.setChecked(true);
+        }
+        if (saveProfs.contains("CHA")) {
+            checkSaveCha.setChecked(true);
+        }
     }
 
     private void loadCharacterDetails() {

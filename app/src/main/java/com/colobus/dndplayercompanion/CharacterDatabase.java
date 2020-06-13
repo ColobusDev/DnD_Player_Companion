@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Character.class, CharClass.class, Race.class, Alignment.class, Background.class, Proficiencies.class},
-        version = 2)
+        version = 3)
 public abstract class CharacterDatabase extends RoomDatabase {
     private static volatile CharacterDatabase instance;
 
@@ -37,7 +37,7 @@ public abstract class CharacterDatabase extends RoomDatabase {
                     CharacterDatabase.class, "character_database")
                     .addCallback(roomCallback)
                     .fallbackToDestructiveMigration()
-                    .addMigrations(MIGRATION_1_2)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build();
         }
         return instance;
@@ -74,10 +74,10 @@ public abstract class CharacterDatabase extends RoomDatabase {
             insertStarterBackgrounds(backgroundDao);
             insertStarterClasses(classDao);
             insertStarterRaces(raceDao);
-            characterDao.insert(new Character("Example name", 1,1,1,1,10,10,10,10,10,10,8,8,10,0,30,1));
-            proficiencyDao.insert(new Proficiencies(1,0,0,0,0, 0,0,
-                    0,0,0,0,0,0,0,0,0,
-                    0,0,0,0,0,0,0,0,0));
+            characterDao.insert(new Character("Example name", 1, 1, 1, 1, 10, 10, 10, 10, 10, 10, 8, 8, 10, 0, 30, 1));
+            proficiencyDao.insert(new Proficiencies(1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0));
 
             return null;
         }
@@ -95,18 +95,18 @@ public abstract class CharacterDatabase extends RoomDatabase {
         }
 
         private void insertStarterClasses(ClassDao classDao) {
-            classDao.insert(new CharClass("Barbarian", 12, null));
-            classDao.insert(new CharClass("Bard", 8, "Charisma"));
-            classDao.insert(new CharClass("Cleric", 8, "Wisdom"));
-            classDao.insert(new CharClass("Druid", 8, "Wisdom"));
-            classDao.insert(new CharClass("Fighter", 10, null));
-            classDao.insert(new CharClass("Monk", 8, "Wisdom"));
-            classDao.insert(new CharClass("Paladin", 10, "Charisma"));
-            classDao.insert(new CharClass("Ranger", 10, "Wisdom"));
-            classDao.insert(new CharClass("Rogue", 8, "Intelligence"));
-            classDao.insert(new CharClass("Sorcerer", 6, "Charisma"));
-            classDao.insert(new CharClass("Warlock", 8, "Charisma"));
-            classDao.insert(new CharClass("Wizard", 6, "Intelligence"));
+            classDao.insert(new CharClass("Barbarian", 12, null, "STR, CON"));
+            classDao.insert(new CharClass("Bard", 8, "Charisma", "DEX, CHA"));
+            classDao.insert(new CharClass("Cleric", 8, "Wisdom", "WIS, CHA"));
+            classDao.insert(new CharClass("Druid", 8, "Wisdom", "INT, WIS"));
+            classDao.insert(new CharClass("Fighter", 10, null, "STR, CON"));
+            classDao.insert(new CharClass("Monk", 8, "Wisdom", "STR, DEX"));
+            classDao.insert(new CharClass("Paladin", 10, "Charisma", "WIS, CHA"));
+            classDao.insert(new CharClass("Ranger", 10, "Wisdom", "STR, DEX"));
+            classDao.insert(new CharClass("Rogue", 8, "Intelligence", "DEX, INT"));
+            classDao.insert(new CharClass("Sorcerer", 6, "Charisma", "CON, CHA"));
+            classDao.insert(new CharClass("Warlock", 8, "Charisma", "WIS, CHA"));
+            classDao.insert(new CharClass("Wizard", 6, "Intelligence", "INT, WIS"));
         }
 
         private void insertStarterBackgrounds(BackgroundDao backgroundDao) {
@@ -148,6 +148,21 @@ public abstract class CharacterDatabase extends RoomDatabase {
             database.execSQL("CREATE INDEX IF NOT EXISTS 'index_proficiencies_character_id' on proficiencies(character_id)");
             database.execSQL("INSERT INTO proficiencies SELECT null,id, 0,0,0,0,0,0,0,0,0,0,0,0," +
                     "0,0,0,0,0,0,0,0,0,0,0,0 FROM character_table");
+        }
+    };
+
+    static final Migration MIGRATION_2_3 = new Migration(2,3) {
+
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE class_table ADD COLUMN save_proficiencies TEXT");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'STR, CON' WHERE name in ('Barbarian', 'Fighter')");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'DEX, CHA' WHERE name in ('Bard')");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'WIS, CHA' WHERE name in ('Cleric', 'Paladin', 'Warlock')");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'INT, WIS' WHERE name in ('Druid', 'Wizard')");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'STR, DEX' WHERE name in ('Monk', 'Ranger')");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'DEX, INT' WHERE name in ('Rogue')");
+            database.execSQL("UPDATE class_table SET save_proficiencies = 'CON, CHA' WHERE name in ('Sorcerer')");
         }
     };
 

@@ -20,10 +20,15 @@ public class CharClass {
     @ColumnInfo(name = "spellAbility")
     private String spellAbility;
 
-    public CharClass(String className, int hitDiceType, String spellAbility) {
+    @ColumnInfo(name = "save_proficiencies")
+    private String saveProficiencies;
+
+    public CharClass(String className, int hitDiceType, String spellAbility,
+                     String saveProficiencies) {
         this.className = className;
         this.hitDiceType = hitDiceType;
         this.spellAbility = spellAbility;
+        this.saveProficiencies = saveProficiencies;
     }
 
     public void setId(int id) {
@@ -45,6 +50,11 @@ public class CharClass {
     public String getSpellAbility() {
         return spellAbility;
     }
+
+    public String getSaveProficiencies() {
+        return saveProficiencies;
+    }
+
 
     @Override
     public String toString() {
