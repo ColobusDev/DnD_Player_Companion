@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_dice"
-        android:name="com.colobus.dndplayercompanion.ui.notifications.NotificationsFragment"
+        android:name="com.colobus.dndplayercompanion.ui.dice.DiceFragment"
         android:label="@string/title_dice"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_dice" />
 </navigation>
