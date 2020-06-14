@@ -33,6 +33,55 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
         getActivity().setTitle("Dice");
         getViews(root);
 
+        diceViewModel.getD2_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD2.setText(s);
+            }
+        });
+        diceViewModel.getD4_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD4.setText(s);
+            }
+        });
+        diceViewModel.getD6_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD6.setText(s);
+            }
+        });
+        diceViewModel.getD8_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD8.setText(s);
+            }
+        });
+        diceViewModel.getD10_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD10.setText(s);
+            }
+        });
+        diceViewModel.getD12_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD12.setText(s);
+            }
+        });
+        diceViewModel.getD20_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD20.setText(s);
+            }
+        });
+        diceViewModel.getD100_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                valD100.setText(s);
+            }
+        });
+
         return root;
     }
 
@@ -76,42 +125,42 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
             case R.id.d2_roll_btn:
                 // roll d2
                 diceRoll = rollDice(2, modifier);
-                valD2.setText(String.valueOf(diceRoll));
+                diceViewModel.getD2_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d4_roll_btn:
                 // roll d4
                 diceRoll = rollDice(4, modifier);
-                valD4.setText(String.valueOf(diceRoll));
+                diceViewModel.getD4_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d6_roll_btn:
                 // roll d6
                 diceRoll = rollDice(6, modifier);
-                valD6.setText(String.valueOf(diceRoll));
+                diceViewModel.getD6_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d8_roll_btn:
                 // roll d8
                 diceRoll = rollDice(8, modifier);
-                valD8.setText(String.valueOf(diceRoll));
+                diceViewModel.getD8_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d10_roll_btn:
                 // roll d10
                 diceRoll = rollDice(10, modifier);
-                valD10.setText(String.valueOf(diceRoll));
+                diceViewModel.getD10_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d12_roll_btn:
                 // roll d12
                 diceRoll = rollDice(12, modifier);
-                valD12.setText(String.valueOf(diceRoll));
+                diceViewModel.getD12_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d20_roll_btn:
                 // roll d20
                 diceRoll = rollDice(20, modifier);
-                valD20.setText(String.valueOf(diceRoll));
+                diceViewModel.getD20_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.d100_roll_btn:
                 // roll d100
                 diceRoll = rollDice(100, modifier);
-                valD100.setText(String.valueOf(diceRoll));
+                diceViewModel.getD100_value().postValue(String.valueOf(diceRoll));
                 break;
             case R.id.reset_dice_btn:
                 valD2.setText("0");
