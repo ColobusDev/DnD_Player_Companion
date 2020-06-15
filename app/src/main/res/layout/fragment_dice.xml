@@ -12,6 +12,58 @@
         android:padding="16dp"
         tools:context=".ui.dice.DiceFragment">
 
+
+        <androidx.cardview.widget.CardView
+            style="@style/CharacterCardItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/dice_mod_lbl"
+                    style="@style/CharacterCardLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/modifier"
+                    android:labelFor="@+id/edit_modifier"/>
+
+                <Button
+                    android:id="@+id/btn_minus_mod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/dice_mod_lbl"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/edit_modifier"
+                    android:layout_width="64sp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_toEndOf="@+id/btn_minus_mod"
+                    android:layout_below="@+id/dice_mod_lbl"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:text="0" />
+
+                <Button
+                    android:id="@+id/btn_plus_mod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_toEndOf="@+id/edit_modifier"
+                    android:layout_below="@+id/dice_mod_lbl"
+                    android:text="+" />
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             style="@style/CharacterCardItem"
             android:layout_width="match_parent"
@@ -24,6 +76,7 @@
 
                 <TextView
                     android:id="@+id/d20_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d20" />
@@ -41,8 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -59,6 +111,7 @@
 
                 <TextView
                     android:id="@+id/d2_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d2" />
@@ -76,8 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -95,6 +147,7 @@
 
                 <TextView
                     android:id="@+id/d4_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d4" />
@@ -112,8 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -131,6 +183,7 @@
 
                 <TextView
                     android:id="@+id/d6_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d6" />
@@ -148,8 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -167,6 +219,7 @@
 
                 <TextView
                     android:id="@+id/d8_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d8" />
@@ -184,8 +237,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -203,6 +255,7 @@
 
                 <TextView
                     android:id="@+id/d10_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d10" />
@@ -220,8 +273,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -239,6 +291,7 @@
 
                 <TextView
                     android:id="@+id/d12_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d12" />
@@ -256,8 +309,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -275,6 +327,7 @@
 
                 <TextView
                     android:id="@+id/d100_lbl"
+                    style="@style/CharacterCardLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="d100" />
@@ -292,18 +345,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/roll_button"
-                    />
+                    android:text="@string/roll_button" />
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
+
 
         <Button
             android:id="@+id/reset_dice_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reset_button"
-            android:layout_gravity="center"/>
-
+            android:layout_gravity="center"
+            android:text="@string/reset_button" />
     </LinearLayout>
 </ScrollView>

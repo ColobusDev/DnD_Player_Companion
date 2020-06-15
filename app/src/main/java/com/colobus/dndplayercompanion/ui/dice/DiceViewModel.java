@@ -14,6 +14,7 @@ public class DiceViewModel extends ViewModel {
     private MutableLiveData<String> d12_value;
     private MutableLiveData<String> d20_value;
     private MutableLiveData<String> d100_value;
+    private MutableLiveData<String> mod_value;
 
 
     public DiceViewModel() {
@@ -25,6 +26,7 @@ public class DiceViewModel extends ViewModel {
         d12_value = new MutableLiveData<>();
         d20_value = new MutableLiveData<>();
         d100_value = new MutableLiveData<>();
+        mod_value = new MutableLiveData<>();
     }
 
     public MutableLiveData<String> getD2_value() {
@@ -57,5 +59,9 @@ public class DiceViewModel extends ViewModel {
 
     public MutableLiveData<String> getD100_value() {
         return d100_value;
+    }
+
+    public MutableLiveData<String> getMod_value() {
+        return mod_value;
     }
 }

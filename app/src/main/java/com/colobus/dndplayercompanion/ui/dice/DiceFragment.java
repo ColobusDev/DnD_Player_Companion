@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +24,9 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
     private DiceViewModel diceViewModel;
 
     private Button btnD20, btnD2, btnD4, btnD6, btnD8, btnD10, btnD12, btnD100;
-    private Button btnReset;
+    private Button btnReset, btnModPlus, btnModMinus;
     private TextView valD20, valD2, valD4, valD6, valD8, valD10, valD12, valD100;
+    private EditText etModifier;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -81,6 +84,12 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
                 valD100.setText(s);
             }
         });
+        diceViewModel.getMod_value().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                etModifier.setText(s);
+            }
+        });
 
         return root;
     }
@@ -104,7 +113,12 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
         btnD100.setOnClickListener(this);
 
         btnReset = root.findViewById(R.id.reset_dice_btn);
-        btnReset.setOnClickListener(this);
+        btnReset.setOnClickListener(this);  
+
+        btnModMinus = root.findViewById(R.id.btn_minus_mod);
+        btnModMinus.setOnClickListener(this);
+        btnModPlus = root.findViewById(R.id.btn_plus_mod);
+        btnModPlus.setOnClickListener(this);
 
         valD2 = root.findViewById(R.id.d2_value);
         valD4 = root.findViewById(R.id.d4_value);
@@ -115,12 +129,15 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
         valD20 = root.findViewById(R.id.d20_value);
         valD100 = root.findViewById(R.id.d100_value);
 
+        etModifier = root.findViewById(R.id.edit_modifier);
+
     }
 
     @Override
     public void onClick(View v) {
-        int modifier = 0;
-        int diceRoll = 0;
+        int modifier = Integer.parseInt(etModifier.getText().toString());
+        diceViewModel.getMod_value().postValue(String.valueOf(modifier));
+        int diceRoll;
         switch (v.getId()) {
             case R.id.d2_roll_btn:
                 // roll d2
@@ -171,6 +188,16 @@ public class DiceFragment extends Fragment implements View.OnClickListener {
                 valD12.setText("0");
                 valD20.setText("0");
                 valD100.setText("0");
+                etModifier.setText("0");
+                break;
+            case R.id.btn_minus_mod:
+                int newMod = Integer.parseInt(etModifier.getText().toString()) - 1;
+                diceViewModel.getMod_value().postValue(String.valueOf(newMod));
+                break;
+            case R.id.btn_plus_mod:
+                newMod = Integer.parseInt(etModifier.getText().toString()) + 1;
+                diceViewModel.getMod_value().postValue(String.valueOf(newMod));
+                break;
             default:
                 break;
         }
