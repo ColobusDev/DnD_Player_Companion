@@ -9,13 +9,30 @@
         android:id="@+id/navigation_home"
         android:name="com.colobus.dndplayercompanion.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_character"
+            app:destination="@id/navigation_character" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dice"
+            app:destination="@id/navigation_dice" />
+        <action
+            android:id="@+id/action_navigation_home_to_viewCharacterFragment"
+            app:destination="@id/viewCharacterFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_character"
         android:name="com.colobus.dndplayercompanion.ui.character.CharactersFragment"
         android:label="@string/title_character"
-        tools:layout="@layout/fragment_character" />
+        tools:layout="@layout/fragment_character" >
+        <action
+            android:id="@+id/action_navigation_character_to_viewCharacterFragment"
+            app:destination="@id/viewCharacterFragment" />
+        <action
+            android:id="@+id/action_navigation_character_to_navigation_add_character"
+            app:destination="@id/navigation_add_character" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_add_character"
@@ -27,5 +44,16 @@
         android:id="@+id/navigation_dice"
         android:name="com.colobus.dndplayercompanion.ui.dice.DiceFragment"
         android:label="@string/title_dice"
-        tools:layout="@layout/fragment_dice" />
+        tools:layout="@layout/fragment_dice" >
+        <action
+            android:id="@+id/action_navigation_dice_to_navigation_character"
+            app:destination="@id/navigation_character" />
+        <action
+            android:id="@+id/action_navigation_dice_to_viewCharacterFragment"
+            app:destination="@id/viewCharacterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewCharacterFragment"
+        android:name="com.colobus.dndplayercompanion.ui.character.ViewCharacterFragment"
+        android:label="ViewCharacterFragment" />
 </navigation>
